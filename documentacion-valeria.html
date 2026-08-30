@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentación del Proyecto: SensorOffice · Estudio Contable Gómez</title>
+<meta name="description" content="Carpeta del Proyecto de SensorOffice: sistema de monitoreo ambiental (hardware + software) para el Estudio Contable Gómez. Requisitos, arquitectura, modelo de datos, gestión y oferta económica.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light dark;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular','Cascadia Code',Consolas,'Liberation Mono',monospace;
+
+  --ink:#151a21; --ink2:#3c4552; --ink3:#697382;
+  --bg:#f6f7f9; --bg2:#eceef2; --bg3:#dfe3e9;
+  --accent:#0145ac; --accent2:#4f9e79; --warm:#b5551d; --warn:#8a5a16;
+  --card:#ffffff; --border:rgba(21,26,33,0.12); --border2:rgba(21,26,33,0.06);
+  --radius:8px; --radius-sm:5px;
+  --new:#0d5138; --new-bg:#e4f4ec; --hw:#5a2a91; --hw-bg:#f1e9fb;
+
+  --info-bg:#e9f1fb; --info-bd:#bcd7f2; --info-tx:#12467e;
+  --hw-box-bg:#f1e9fb; --hw-box-bd:#d6bff0; --hw-box-tx:#5a2a91;
+  --warn-bg:#fbf0da; --warn-bd:#eccf8f; --warn-tx:#6b4410;
+  --ok-bg:#e4f4ec; --ok-bd:#a9dcc4; --ok-tx:#0d5138;
+  --todo-bg:#fdf4d8; --todo-bd:#d7ad46; --todo-tx:#6f4a10;
+  --del-bg:#fbf6ef; --del-bd:#c98f3e;
+  --prio-a-bg:#fbe9e9; --prio-a-tx:#9a2b2b;
+  --prio-m-bg:#fbf0da; --prio-m-tx:#7a4a0b;
+  --prio-b-bg:#e9f2dd; --prio-b-tx:#3b6d11;
+  --code-bg:#0d1117; --code-tx:#e6edf3; --code-bd:#20262f;
+  --figure-bg:#f8f9fb;
+  --brand-blue:#0145ac; --brand-green:#82c7a5;
+  --footer-bg:#1b212c; --footer-tx:#c7ccd5;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#e7eaef; --ink2:#b4bcc8; --ink3:#828b98;
+    --bg:#0f1319; --bg2:#171c23; --bg3:#212832;
+    --accent:#5c9df0; --accent2:#82c7a5; --warm:#e08a4f; --warn:#d0a35e;
+    --card:#161b22; --border:rgba(255,255,255,0.13); --border2:rgba(255,255,255,0.07);
+    --new:#8fd8ba; --new-bg:#12281f; --hw:#cbb0ec; --hw-bg:#221733;
+
+    --info-bg:#132738; --info-bd:#25507a; --info-tx:#a9cdf0;
+    --hw-box-bg:#211634; --hw-box-bd:#4a3170; --hw-box-tx:#cbb0ec;
+    --warn-bg:#332810; --warn-bd:#6b551f; --warn-tx:#e6c98d;
+    --ok-bg:#12281f; --ok-bd:#2c5f48; --ok-tx:#8fd8ba;
+    --todo-bg:#2c2410; --todo-bd:#5f4f1e; --todo-tx:#e0c583;
+    --del-bg:#1c1a15; --del-bd:#6f5323;
+    --prio-a-bg:#331b1b; --prio-a-tx:#e9a3a3;
+    --prio-m-bg:#332810; --prio-m-tx:#e6c98d;
+    --prio-b-bg:#1e2c12; --prio-b-tx:#a9d488;
+    --code-bg:#0d1117; --code-tx:#e6edf3; --code-bd:#2b323c;
+    --figure-bg:#f4f6f8;
+    --footer-bg:#232b3a;
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;-webkit-text-size-adjust:100%;}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth;}}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+h1,h2,h3,h4,.ui{font-family:var(--sans);}
+code,kbd,pre,.mono{font-family:var(--mono);}
+::selection{background:var(--accent);color:#fff;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px;}
+
+/* LAYOUT */
+.wrap{max-width:1800px;margin:0 auto;display:grid;grid-template-columns:264px 1fr;gap:0;}
+/* TOC */
+aside{position:sticky;top:0;align-self:start;height:100vh;height:100dvh;overflow-y:auto;padding:2.25rem 1.25rem 2rem;border-right:1px solid var(--border);background:var(--bg);scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+aside::-webkit-scrollbar{width:8px;}
+aside::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+.toc-brand{font-weight:700;font-size:12.5px;letter-spacing:.01em;margin-bottom:.2rem;color:var(--ink);}
+.toc-brand span{color:var(--accent);}
+.toc-sub{font-size:11px;color:var(--ink3);margin-bottom:1.4rem;font-family:var(--mono);letter-spacing:.02em;}
+.toc a{display:block;font-family:var(--sans);font-size:12px;color:var(--ink3);text-decoration:none;padding:4px 9px;border-radius:var(--radius-sm);transition:background .14s,color .14s;line-height:1.45;border-left:2px solid transparent;}
+.toc a:hover{background:var(--bg2);color:var(--ink);}
+.toc a.lvl2{padding-left:20px;font-size:11.5px;}
+.toc a.lvl3{padding-left:32px;font-size:11px;color:var(--ink3);}
+.toc a.act{background:var(--bg2);color:var(--accent);font-weight:600;border-left-color:var(--accent);}
+.toc .toc-group{margin-top:1.1rem;margin-bottom:.25rem;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:0 9px;font-family:var(--sans);}
+
+/* MAIN */
+main{padding:3rem 3.25rem 6rem;min-width:0;}
+.doc-hero{border-bottom:1px solid var(--border);padding-bottom:1.75rem;margin-bottom:2.75rem;}
+.doc-kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.doc-kicker::before{content:'';width:22px;height:1px;background:var(--accent);display:block;}
+.doc-hero h1{font-weight:600;font-size:clamp(1.8rem,3.6vw,2.5rem);line-height:1.15;letter-spacing:-.015em;margin-bottom:.4rem;}
+.doc-hero .prod{color:var(--accent);}
+.doc-hero p.lead{font-size:1.02rem;color:var(--ink2);margin-top:.85rem;line-height:1.6;}
+.hero-meta{margin-top:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.5rem 1.5rem;font-size:12.5px;color:var(--ink3);}
+.hero-meta strong{color:var(--ink);font-weight:600;}
+
+/* HEADINGS */
+h2.sec{font-weight:600;font-size:1.55rem;letter-spacing:-.015em;margin:3.75rem 0 .4rem;padding-top:1rem;scroll-margin-top:1.25rem;}
+h2.sec .n{color:var(--accent);font-family:var(--mono);font-weight:500;font-size:.85em;margin-right:.15em;}
+h2.sec:first-of-type{margin-top:0;}
+h3.sub{font-weight:600;font-size:1.13rem;margin:2.1rem 0 .5rem;scroll-margin-top:1.25rem;color:var(--ink);letter-spacing:-.01em;}
+h3.sub .n{color:var(--accent);font-family:var(--mono);font-weight:500;font-size:.86em;margin-right:.1em;}
+h4.subsub{font-weight:600;font-size:.97rem;margin:1.5rem 0 .4rem;color:var(--ink2);scroll-margin-top:1.25rem;letter-spacing:.005em;}
+h4.subsub .n{color:var(--accent);font-family:var(--mono);font-weight:500;}
+p{margin-bottom:.9rem;}
+ul,ol{margin:.4rem 0 1.1rem 1.25rem;}
+li{margin-bottom:.4rem;}
+li::marker{color:var(--ink3);}
+strong{font-weight:600;color:var(--ink);}
+.sec-rule{height:1px;background:var(--border);margin:2.75rem 0;}
+a.inline{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;}
+a.inline:hover{text-decoration-thickness:2px;}
+
+/* SOURCE REFERENCE CHIP */
+.bookref{display:inline-flex;align-items:center;font-family:var(--mono);font-size:10.5px;font-weight:500;background:var(--bg2);color:var(--ink2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1px 8px;margin-left:.45rem;vertical-align:middle;letter-spacing:.01em;}
+.bookref::before{content:'\00a7\00a0';color:var(--accent);font-weight:600;}
+
+/* CALLOUT BOXES */
+.box{border-radius:var(--radius);padding:.9rem 1.15rem;margin:1.15rem 0;font-size:.88rem;line-height:1.6;border:1px solid transparent;}
+.box p{max-width:none;margin-bottom:.5rem;}
+.box p:last-child{margin-bottom:0;}
+.box.info{background:var(--info-bg);border-color:var(--info-bd);color:var(--info-tx);}
+.box.hw{background:var(--hw-box-bg);border-color:var(--hw-box-bd);color:var(--hw-box-tx);}
+.box.warn{background:var(--warn-bg);border-color:var(--warn-bd);color:var(--warn-tx);}
+.box.ok{background:var(--ok-bg);border-color:var(--ok-bd);color:var(--ok-tx);}
+.box.todo{background:var(--todo-bg);border:1px dashed var(--todo-bd);color:var(--todo-tx);}
+.box .box-t{font-weight:600;display:block;margin-bottom:.3rem;font-family:var(--sans);}
+.box code.ic{background:rgba(127,127,127,.18);border-color:transparent;color:inherit;}
+
+/* PLACEHOLDER (entregable del equipo) */
+.deliverable{border:1px dashed var(--del-bd);background:var(--del-bg);border-radius:var(--radius);padding:1rem 1.15rem;margin:1.15rem 0;font-size:.86rem;color:var(--ink2);}
+.deliverable .d-t{font-weight:600;color:var(--warm);display:flex;align-items:center;gap:8px;margin-bottom:.4rem;font-family:var(--sans);text-transform:uppercase;letter-spacing:.06em;font-size:11px;}
+.deliverable .d-t::before{content:'';width:8px;height:8px;background:currentColor;border-radius:2px;flex:none;}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;margin:1.1rem 0 1.5rem;border:1px solid var(--border);border-radius:var(--radius);-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.83rem;background:var(--card);}
+thead th{background:var(--ink);color:var(--bg);text-align:left;font-weight:500;padding:.55rem .85rem;font-size:.72rem;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;}
+tbody td{padding:.6rem .85rem;border-bottom:1px solid var(--border2);vertical-align:top;color:var(--ink2);line-height:1.5;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:var(--bg2);}
+td strong,th{color:var(--ink);}
+td strong{font-weight:600;}
+.rid{font-family:var(--mono);font-weight:500;color:var(--ink);white-space:nowrap;font-size:.9em;}
+.origin{font-size:.76rem;color:var(--ink3);margin-top:4px;font-family:var(--sans);}
+.tag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:500;padding:1px 5px;border-radius:3px;margin-left:5px;vertical-align:middle;letter-spacing:.02em;border:1px solid transparent;}
+.tag.hw{background:var(--hw-box-bg);color:var(--hw-box-tx);border-color:var(--hw-box-bd);}
+.tag.sw{background:var(--info-bg);color:var(--info-tx);border-color:var(--info-bd);}
+.prio{display:inline-block;font-family:var(--sans);font-size:10px;padding:2px 9px;border-radius:20px;font-weight:600;white-space:nowrap;}
+.prio.a{background:var(--prio-a-bg);color:var(--prio-a-tx);}
+.prio.m{background:var(--prio-m-bg);color:var(--prio-m-tx);}
+.prio.b{background:var(--prio-b-bg);color:var(--prio-b-tx);}
+
+/* USER PROFILE TABLE (formato libro UTN p.56/57) */
+.user-tbl{border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;margin:1rem 0;background:var(--card);}
+.user-tbl .row{display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid var(--border2);}
+.user-tbl .row:last-child{border-bottom:none;}
+.user-tbl .k{background:var(--bg2);font-family:var(--sans);font-weight:600;font-size:.8rem;color:var(--accent);padding:.6rem .85rem;border-right:1px solid var(--border2);}
+.user-tbl .v{padding:.6rem .85rem;font-family:var(--sans);font-size:.85rem;color:var(--ink2);line-height:1.55;}
+.user-tbl.admin .k{color:var(--bg);background:var(--accent);}
+
+/* DEFINITION LIST */
+.deflist{margin:1.1rem 0;border-top:1px solid var(--border2);}
+.deflist .d-row{display:grid;grid-template-columns:210px 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--border2);font-family:var(--sans);font-size:.86rem;}
+.deflist .d-row:last-child{border-bottom:none;}
+.deflist .d-k{font-weight:600;color:var(--ink);}
+.deflist .d-v{color:var(--ink2);line-height:1.55;}
+@media(max-width:560px){.deflist .d-row{grid-template-columns:1fr;gap:.15rem;}.user-tbl .row{grid-template-columns:120px 1fr;}}
+
+/* CODE */
+pre{background:var(--code-bg);color:var(--code-tx);border-radius:var(--radius);padding:1.1rem 1.25rem;overflow-x:auto;margin:1.1rem 0 1.5rem;font-size:.8rem;line-height:1.65;border:1px solid var(--code-bd);}
+pre .kw{color:#ff7b72;} pre .ty{color:#79c0ff;} pre .cm{color:#8b949e;font-style:italic;} pre .st{color:#a5d6ff;} pre .fn{color:#d2a8ff;}
+code.ic{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;padding:1px 6px;font-size:.85em;color:var(--accent);}
+
+/* ER DIAGRAM */
+.er-fig{background:var(--figure-bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.35rem;margin:1.3rem 0;overflow-x:auto;}
+.er-fig svg{display:block;min-width:760px;margin:0 auto;}
+.figcap{font-family:var(--sans);font-size:.78rem;color:var(--ink3);text-align:center;margin-top:.7rem;}
+
+/* ARCH FLOW */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.77rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin:1.1rem 0;color:var(--ink2);}
+.flow .node{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 10px;color:var(--ink);}
+.flow .arr{color:var(--ink3);}
+
+/* MISC */
+.pill-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:.7rem 0 1.1rem;}
+.pill{font-family:var(--mono);font-size:10.5px;font-weight:500;padding:3px 10px;border-radius:20px;background:var(--bg2);color:var(--ink2);border:1px solid var(--border);}
+footer{margin-top:5rem;background:var(--footer-bg);color:var(--footer-tx);border-radius:var(--radius);overflow:hidden;font-family:var(--sans);font-size:12.5px;line-height:1.7;}
+footer .footer-accent{display:flex;height:4px;}
+footer .footer-accent i{display:block;}
+footer .footer-accent i:first-child{background:var(--brand-blue);flex:2;}
+footer .footer-accent i:last-child{background:var(--brand-green);flex:1;}
+footer .footer-inner{display:flex;flex-direction:column;align-items:flex-start;gap:1.15rem;padding:1.6rem 1.75rem;}
+footer .footer-txt strong{color:#fff;font-weight:600;}
+footer .btn-linkedin{display:inline-flex;align-items:center;gap:9px;background:var(--brand-blue);color:#fff;font-family:var(--sans);font-size:12.5px;font-weight:600;padding:9px 15px;border-radius:var(--radius-sm);text-decoration:none;white-space:nowrap;border:1px solid rgba(255,255,255,.16);transition:transform .14s,background .14s;}
+footer .btn-linkedin:hover{background:#0a52c4;transform:translateY(-1px);}
+footer .btn-linkedin:active{transform:translateY(0);}
+footer .btn-linkedin:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
+@media(max-width:560px){footer .footer-inner{padding:1.3rem 1.25rem;}footer .btn-linkedin{width:100%;justify-content:center;}}
+
+@media(max-width:920px){
+  .wrap{grid-template-columns:1fr;}
+  aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border);padding:1.5rem 1.25rem;}
+  main{padding:2.25rem 1.25rem 4rem;}
+  .doc-hero h1{font-size:clamp(1.6rem,6vw,2rem);}
+}
+@media(max-width:560px){
+  main{padding:1.75rem 1rem 3rem;}
+  .hero-meta{grid-template-columns:1fr;}
+}
+@media print{
+  aside,.doc-kicker::before{display:none;}
+  .wrap{display:block;max-width:none;}
+  main{padding:0;}
+  body{background:#fff;color:#000;font-size:10.5pt;line-height:1.5;}
+  h2.sec,h3.sub,h4.subsub{color:#000;break-after:avoid;}
+  h2.sec .n,h3.sub .n,h4.subsub .n,.doc-kicker,.doc-hero .prod,a.inline{color:#000;}
+  .tbl-wrap,.er-fig,pre,.box,.deliverable,.user-tbl,table tr{break-inside:avoid;}
+  .tbl-wrap,.box,.deliverable,.er-fig,.flow{border-color:#bbb;}
+  thead th{background:#eee;color:#000;}
+  pre{background:#f5f5f5;color:#111;border:1px solid #ccc;}
+  pre .kw,pre .ty,pre .cm,pre .st,pre .fn{color:#111;}
+  .er-fig{background:#fff;}
+  a.inline{text-decoration:underline;}
+  footer{background:#fff;color:#333;border:1px solid #bbb;}
+  footer .footer-accent{display:none;}
+  footer .footer-txt strong{color:#000;}
+  footer .btn-linkedin{background:#fff;color:#000;border:1px solid #333;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ═══════════ TOC ═══════════ -->
+<aside>
+  <div class="toc-brand">Documentación del <span>Proyecto</span></div>
+  <div class="toc-sub">SensorOffice · 7mo Informática 2026</div>
+  <nav class="toc">
+    <div class="toc-group">Primera sección</div>
+    <a href="#s1">1 · Control de Cambios</a>
+    <a href="#s2">2 · Introducción</a>
+    <a href="#s2-1" class="lvl2">2.1 Propósito</a>
+    <a href="#s2-2" class="lvl2">2.2 Alcance</a>
+    <a href="#s2-3" class="lvl2">2.3 Personal Involucrado</a>
+    <a href="#s2-4" class="lvl2">2.4 Definiciones y acrónimos</a>
+    <a href="#s2-5" class="lvl2">2.5 Referencias</a>
+    <a href="#s2-6" class="lvl2">2.6 Resumen Ejecutivo</a>
+    <div class="toc-group">Segunda sección</div>
+    <a href="#s3">3 · Descripción General</a>
+    <a href="#s3-1" class="lvl2">3.1 Perspectiva</a>
+    <a href="#s3-2" class="lvl2">3.2 Funcionalidad</a>
+    <a href="#s3-3" class="lvl2">3.3 Usuarios</a>
+    <a href="#s3-4" class="lvl2">3.4 Restricciones</a>
+    <a href="#s3-5" class="lvl2">3.5 Suposiciones</a>
+    <a href="#s3-6" class="lvl2">3.6 Evolución previsible</a>
+    <div class="toc-group">Tercera sección</div>
+    <a href="#s4">4 · Requisitos Específicos</a>
+    <a href="#s4-1" class="lvl2">4.1 Funcionales</a>
+    <a href="#s4-2" class="lvl2">4.2 Interfaz de usuario</a>
+    <a href="#s4-3" class="lvl2">4.3 Interfaz de hardware</a>
+    <a href="#s4-4" class="lvl2">4.4 Interfaz de software</a>
+    <a href="#s4-5" class="lvl2">4.5 Comunicación</a>
+    <a href="#s4-6" class="lvl2">4.6 Modelo Entidad-Relación</a>
+    <a href="#s5">5 · Oferta de Gestión</a>
+    <a href="#s6">6 · Oferta Económica</a>
+    <a href="#s7">7 · Estimación Económica</a>
+    <a href="#s8">8 · Contrato</a>
+  </nav>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main>
+
+<div class="doc-hero">
+  <div class="doc-kicker">Carpeta del Proyecto · Documentación</div>
+  <h1><span class="prod">SensorOffice</span><br>Sistema de monitoreo ambiental para el Estudio Contable Gómez</h1>
+  <p class="lead">Documentación técnica, operativa y económica del proyecto (etapas E01 a E06). Sistema de hardware y software para medir, visualizar y gestionar las condiciones ambientales (temperatura, humedad, calidad del aire, luminosidad y consumo eléctrico) de un estudio contable de tres oficinas en Caseros.</p>
+  <div class="hero-meta">
+    <span><strong>Cliente:</strong> Valeria Gómez · Estudio Contable Gómez, Caseros</span>
+    <span><strong>Materia:</strong> Evaluación de Proyectos</span>
+    <span><strong>Docente:</strong> Prof. Pedaci, Lourdes</span>
+    <span><strong>Ciclo:</strong> 7mo Informática 2026 · Instituto Leonardo Murialdo</span>
+  </div>
+</div>
+
+<div class="box info">
+  <span class="box-t">Sobre este documento</span>
+  <p>Sigue la estructura de la <strong>Carpeta del Proyecto</strong> definida en el módulo de Documentación de la materia. Los apartados que el módulo marca con página del libro <em>Buenas Prácticas para Proyectos Informáticos</em> (UTN, edUTecNe, 2012) respetan el formato de tabla de esa fuente. Los apartados que no corresponden a un proyecto de hardware + software fueron retirados y se aclara el motivo en cada caso.</p>
+</div>
+
+<!-- ══════ 1. CONTROL DE CAMBIOS ══════ -->
+<h2 class="sec" id="s1"><span class="n">1.</span> Control de Cambios</h2>
+<p>Registro de las modificaciones realizadas sobre la documentación y el alcance del proyecto, con fecha, responsable y detalle del cambio. Cada validación con Valeria que derive en un cambio de requerimiento se anota como una fila nueva (es un hito del control de cambios, según los Lineamientos 2026).</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Versión</th><th>Fecha</th><th>Responsable</th><th>Detalle del cambio</th></tr></thead>
+<tbody>
+<tr><td class="rid">0.1</td><td>Pendiente</td><td>Equipo</td><td>Versión inicial de la documentación a partir de la primera entrevista (Bloques A, B y C).</td></tr>
+<tr><td class="rid">0.2</td><td>Pendiente</td><td>Equipo</td><td>Incorporación de los relevamientos de la segunda entrevista (Bloques D, E, F y G): entorno físico, instalación y datos técnicos que definen el hardware.</td></tr>
+<tr><td class="rid">0.3</td><td>Pendiente</td><td>Equipo</td><td>Alta del requerimiento de repetidor WiFi (RHW06) tras detectar que la red no cubre todos los ambientes. Impacto evaluado en GANTT y oferta económica.</td></tr>
+<tr><td class="rid">0.4</td><td>Pendiente</td><td>Equipo</td><td>Alta del control remoto de splits vía enchufe SmartThings (RF04 / RHW07 / ISW06) a partir del síntoma S2.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="box todo"><span class="box-t">A completar por el equipo</span>Las fechas y las versiones definitivas se cargan a medida que el proyecto avanza. Mantener una fila por cada cambio de alcance validado con el cliente.</div>
+
+<!-- ══════ 2. INTRODUCCIÓN ══════ -->
+<h2 class="sec" id="s2"><span class="n">2.</span> Introducción</h2>
+
+<h3 class="sub" id="s2-1"><span class="n">2.1.</span> Propósito</h3>
+<p>El propósito del proyecto es dotar al Estudio Contable Gómez de una forma <strong>objetiva y en tiempo real</strong> de conocer el estado ambiental de sus oficinas, para dejar de depender de que un empleado se queje para enterarse de que un ambiente está incómodo. Hoy el control es 100% manual y visual: nadie mide temperatura, humedad ni calidad del aire, y los equipos de climatización se manejan a criterio de cada persona.</p>
+<p>SensorOffice busca resolver tres problemas medibles: la <strong>detección tardía</strong> de la incomodidad ambiental, el <strong>gasto eléctrico</strong> de los splits que quedan encendidos sin ocupación, y la <strong>falta de ventilación</strong> de la oficina del fondo (que "siempre huele a cerrado" porque nadie mide el CO₂).</p>
+
+<h3 class="sub" id="s2-2"><span class="n">2.2.</span> Alcance</h3>
+<p>El sistema <strong>incluye</strong>: una red de nodos de sensores (ESP32) instalados en cada ambiente, un backend que recibe y almacena las lecturas, un dashboard web (PC y celular) que muestra el estado en tiempo real y el historial, un sistema de alertas por umbral, un reporte mensual de consumo por sector, y la integración con Samsung SmartThings para apagar los splits de forma remota.</p>
+<p>El sistema <strong>no incluye</strong> el apagado automático de los splits sin intervención humana, el control de actuadores de ventilación, ni la integración con el software contable del estudio. El detalle completo del límite del alcance está en el apartado de Limitaciones (dentro de 4.1) y se formaliza en el Contrato (sección 8).</p>
+
+<h3 class="sub" id="s2-3"><span class="n">2.3.</span> Personal Involucrado</h3>
+<p>Roles del equipo de proyecto (según los Lineamientos 2026: PM, desarrollo Frontend/Backend, UX/UI, microcontrolador, base de datos e infraestructura de red). En proyectos de hardware se suma el rol de <strong>Técnico instalador</strong>.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Rol</th><th>Responsabilidad principal</th><th>Integrante</th></tr></thead>
+<tbody>
+<tr><td><strong>Project Manager (PM)</strong></td><td>Planificación temporal (GANTT), control de alcance y relación con el cliente.</td><td>A completar</td></tr>
+<tr><td><strong>Backend / BD</strong></td><td>Servidor Node.js, broker MQTT, base de datos PostgreSQL y API REST.</td><td>A completar</td></tr>
+<tr><td><strong>Frontend / UX-UI</strong></td><td>Dashboard React, mockup en Figma y validación de interfaz con el usuario.</td><td>A completar</td></tr>
+<tr><td><strong>Especialista en microcontrolador (MCU)</strong></td><td>Firmware del ESP32, integración de sensores y diseño 3D del nodo.</td><td>A completar</td></tr>
+<tr><td><strong>Infraestructura de red</strong></td><td>Cobertura WiFi (repetidor), MQTT e integración SmartThings.</td><td>A completar</td></tr>
+<tr><td><strong>Técnico instalador</strong> <span class="tag hw">HW</span></td><td>Instalación física de nodos y enchufes, configuración de red local sin reprogramar el ESP32.</td><td>A completar</td></tr>
+<tr><td><strong>Cliente</strong></td><td>Valida requerimientos, prioriza y firma el contrato.</td><td>Valeria Gómez (Estudio Contable Gómez)</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub" id="s2-4"><span class="n">2.4.</span> Definiciones, acrónimos y abreviaturas</h3>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Término</th><th>Definición</th></tr></thead>
+<tbody>
+<tr><td class="mono">ESP32</td><td>Microcontrolador con WiFi integrado que corre el firmware del nodo y lee los sensores.</td></tr>
+<tr><td class="mono">MQTT</td><td>Protocolo de mensajería liviano (publicación/suscripción) usado entre los nodos y el servidor. Estándar de IoT de bajo consumo.</td></tr>
+<tr><td class="mono">Broker</td><td>Intermediario MQTT (Mosquitto) que recibe las publicaciones de los nodos y las distribuye al backend.</td></tr>
+<tr><td class="mono">API REST</td><td>Interfaz HTTP que expone los datos del backend al dashboard.</td></tr>
+<tr><td class="mono">Nodo</td><td>Conjunto ESP32 + sensores montado en un ambiente. Unidad física de medición.</td></tr>
+<tr><td class="mono">Umbral</td><td>Valor límite (mínimo o máximo) de una variable ambiental que, al superarse, dispara una alerta.</td></tr>
+<tr><td class="mono">SmartThings</td><td>Plataforma de hogar/oficina inteligente de Samsung. Se usa para el enchufe inteligente que controla los splits.</td></tr>
+<tr><td class="mono">RF / RNF</td><td>Requerimiento Funcional / Requerimiento No Funcional.</td></tr>
+<tr><td class="mono">RHW / ISW</td><td>Requerimiento de Hardware / Interfaz de Software (componente de software del sistema).</td></tr>
+<tr><td class="mono">OKR / KR</td><td>Objective and Key Results / Resultado Clave (métrica cuantitativa de progreso).</td></tr>
+<tr><td class="mono">Línea de base</td><td>Medición de la situación inicial (antes del sistema) usada como referencia de comparación (benchmarking).</td></tr>
+<tr><td class="mono">PWA</td><td>Progressive Web App: web instalable en el celular sin pasar por una tienda de aplicaciones.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub" id="s2-5"><span class="n">2.5.</span> Referencias</h3>
+<p>Formato APA 7ª edición.</p>
+<ul>
+<li>Pedaci, L. (2026). <em>Evaluación de Proyectos - Módulo 01: El Proyecto y sus generalidades</em>. Instituto Leonardo Murialdo.</li>
+<li>Pedaci, L. (2026). <em>Evaluación de Proyectos - Módulo 02: Fases de un Proyecto</em>. Instituto Leonardo Murialdo.</li>
+<li>Pedaci, L. (2026). <em>Evaluación de Proyectos - Módulo de Documentación</em>. Instituto Leonardo Murialdo.</li>
+<li>Pedaci, L. (2026). <em>Lineamientos y Metodologías de Trabajo - Proyecto Tecnológico Interdisciplinario</em>. Instituto Leonardo Murialdo.</li>
+<li>Universidad Tecnológica Nacional. (2012). <em>Buenas Prácticas para Proyectos Informáticos</em>. edUTecNe. ISBN 978-987-1896-01-1.</li>
+<li>Project Management Institute. (s.f.). <em>PMBOK - Fases del proyecto</em>.</li>
+</ul>
+
+<h3 class="sub" id="s2-6"><span class="n">2.6.</span> Resumen Ejecutivo</h3>
+<p>SensorOffice es un sistema de monitoreo ambiental de hardware y software pensado para el Estudio Contable Gómez (Caseros, Tres de Febrero): tres oficinas, ~180 m², 8 empleados y 2 socios. El sistema instala nodos de sensores en cada ambiente que miden temperatura, humedad, CO₂, luminosidad, presencia y consumo eléctrico, y los envía a un dashboard web donde Valeria y los empleados ven el estado en tiempo real, reciben alertas cuando una variable se sale de rango y pueden apagar los splits de forma remota.</p>
+<p><strong>Público objetivo:</strong> pymes de oficina de superficie chica-media que necesitan controlar confort y consumo sin instalar equipos de climatización nuevos. <strong>Resultados esperados:</strong> bajar las quejas de temperatura de 3-4 por semana a un máximo de 1, detectar problemas ambientales en menos de 5 minutos (contra "horas, cuando alguien avisa") y generar por primera vez un reporte mensual de consumo por sector que permita cuantificar el ahorro.</p>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 3. DESCRIPCIÓN GENERAL ══════ -->
+<h2 class="sec" id="s3"><span class="n">3.</span> Descripción General</h2>
+
+<h3 class="sub" id="s3-1"><span class="n">3.1.</span> Perspectiva del producto</h3>
+<p>SensorOffice es un <strong>sistema nuevo</strong>: hoy el estudio no tiene ningún sistema de monitoreo, el control es 100% manual. No reemplaza ni mejora un software existente, y tampoco es una parte de un sistema mayor. Sí se apoya en infraestructura que el estudio ya tiene (conexión Claro Fibra 600 MB, PC de escritorio y celular Samsung con la app SmartThings instalada) y en los splits actuales, que se integran mediante enchufes inteligentes en lugar de reemplazarse.</p>
+<p>Arquitectura en tres capas (hardware de captura, backend de procesamiento y frontend de visualización):</p>
+<div class="flow">
+  <span class="node">Sensores + ESP32</span><span class="arr">→ WiFi/MQTT →</span>
+  <span class="node">Backend Node.js</span><span class="arr">→ API REST →</span>
+  <span class="node">Dashboard React (PC + celular)</span>
+</div>
+
+<h3 class="sub" id="s3-2"><span class="n">3.2.</span> Funcionalidad del producto</h3>
+<p>A nivel general (sin entrar todavía en los requisitos funcionales del apartado 4.1), el producto permite:</p>
+<ul>
+<li>Medir de forma continua las condiciones ambientales de cada oficina (temperatura, humedad, CO₂, luminosidad, presencia) y el consumo eléctrico por circuito.</li>
+<li>Mostrar el estado actual de cada ambiente en una pantalla única, en lenguaje claro y sin jerga técnica.</li>
+<li>Guardar el historial de lecturas para poder ver la evolución en el tiempo.</li>
+<li>Avisar automáticamente (alerta) cuando una variable se sale del rango configurado.</li>
+<li>Detectar equipos encendidos en ambientes sin ocupación y permitir apagarlos a distancia desde el celular.</li>
+<li>Generar un reporte mensual de consumo por sector.</li>
+</ul>
+
+<h3 class="sub" id="s3-3"><span class="n">3.3.</span> Características de los Usuarios <span class="bookref">Buenas Prácticas UTN p.56/57</span></h3>
+<p>Siguiendo el formato de la tabla de usuarios del libro UTN (tipo de usuario, formación y actividades). El sistema define dos perfiles con acceso a la interfaz (administradora y empleado) y un tercer perfil operativo propio de los proyectos con hardware (técnico instalador).</p>
+
+<div class="user-tbl admin">
+  <div class="row"><div class="k">Tipo de usuario</div><div class="v"><strong>Administradora (Valeria Gómez)</strong></div></div>
+  <div class="row"><div class="k">Formación</div><div class="v">Socia administradora, 44 años. Comodidad tecnológica media (3/5). Usuaria de PC de escritorio y celular Samsung con SmartThings instalado. No maneja jerga técnica.</div></div>
+  <div class="row"><div class="k">Actividades</div><div class="v">Acceso total: consulta el estado y el historial, configura los umbrales, gestiona los usuarios, recibe las alertas y opera el apagado remoto de los splits. Uso diario, principalmente a la mañana.</div></div>
+</div>
+
+<div class="user-tbl">
+  <div class="row"><div class="k">Tipo de usuario</div><div class="v"><strong>Empleado (visor)</strong></div></div>
+  <div class="row"><div class="k">Formación</div><div class="v">8 personas del estudio. Nivel tecnológico variable, a relevar con al menos 2 entrevistas cortas (es un KR del Objetivo 1). Cada uno trabaja desde la PC de su puesto.</div></div>
+  <div class="row"><div class="k">Actividades</div><div class="v">Solo visualización: consulta los datos actuales y el historial de su ambiente. No puede modificar umbrales ni configuración. Uso ocasional (cuando se siente incómodo).</div></div>
+</div>
+
+<div class="user-tbl">
+  <div class="row"><div class="k">Tipo de usuario</div><div class="v"><strong>Técnico instalador</strong> <span class="tag hw">HW</span></div></div>
+  <div class="row"><div class="k">Formación</div><div class="v">1 o 2 integrantes del equipo de proyecto. Perfil exclusivo de proyectos físicos.</div></div>
+  <div class="row"><div class="k">Actividades</div><div class="v">Instala los nodos y los enchufes, y configura el nombre y la clave de la red WiFi y el nombre del ambiente desde un portal web de setup (red local), sin reprogramar el ESP32. La instalación de un nodo nuevo no debe superar los 20 minutos.</div></div>
+</div>
+
+<h3 class="sub" id="s3-4"><span class="n">3.4.</span> Restricciones <span class="bookref">Buenas Prácticas UTN p.57</span></h3>
+
+<h4 class="subsub" id="s3-4-1"><span class="n">3.4.1.</span> Políticas reguladoras</h4>
+<p>El sistema se desarrolla con software libre y de código abierto (Node.js, PostgreSQL, Mosquitto, React, framework Arduino). No hay costo de licencia de software. La única política de pago externa posible es el alojamiento del backend en la nube (ver 3.4.2). El repositorio se publica en GitHub; si se publica como privado, se incluye al equipo docente como colaborador.</p>
+
+<h4 class="subsub" id="s3-4-2"><span class="n">3.4.2.</span> Limitaciones de hardware</h4>
+<p>El backend necesita estar disponible 24/7 para no perder lecturas. El estudio no cuenta con un servidor propio siempre encendido, por lo que se resuelve con un servicio cloud (por ejemplo Railway, Render o AWS) o una Raspberry Pi local. Los nodos se alimentan por cable USB desde tomacorriente (hay toma en todos los ambientes), no por batería. El sensor MQ-135 (CO₂/gases) es de bajo costo y da valores orientativos, no de precisión de laboratorio.</p>
+
+<h4 class="subsub" id="s3-4-3"><span class="n">3.4.3.</span> Interfaces con otras aplicaciones</h4>
+<p>El sistema se integra con la <strong>API de Samsung SmartThings</strong> para enviar comandos de encendido/apagado a los enchufes inteligentes de los splits. No se integra con ningún software contable, ERP ni sistema interno del estudio (queda fuera del alcance).</p>
+
+<h4 class="subsub" id="s3-4-4"><span class="n">3.4.4.</span> Función de control</h4>
+<p>Autenticación con usuario y contraseña, y control de acceso por rol. La administradora (Valeria) tiene acceso total; los empleados tienen acceso de solo lectura y no pueden modificar umbrales ni configuración. Toda operación que modifica el estado del sistema (cambio de umbral, comando a un enchufe) queda registrada con usuario, fecha y hora (trazabilidad).</p>
+
+<h4 class="subsub" id="s3-4-5"><span class="n">3.4.5.</span> Requisitos del lenguaje</h4>
+<p>Toda la interfaz y el manual de uso están en <strong>español</strong>. El estado del ambiente se comunica en lenguaje natural ("Temperatura OK", "CO₂ elevado, ventile la sala") y no como valores crudos sin contexto, dada la comodidad tecnológica media de la usuaria administradora.</p>
+
+<h4 class="subsub" id="s3-4-6"><span class="n">3.4.6.</span> Protocolos señalados</h4>
+<p>Comunicación nodo → servidor por <strong>MQTT</strong> (estándar IoT de bajo consumo). Comunicación servidor → dashboard por <strong>HTTP/REST</strong>. Integración con SmartThings por HTTPS con autenticación <strong>OAuth 2.0</strong>.</p>
+
+<h4 class="subsub" id="s3-4-7"><span class="n">3.4.7.</span> Requisitos de fiabilidad</h4>
+<p>Cada nodo debe reconectarse solo a la red WiFi si pierde señal (reintento cada 30 segundos, sin reiniciar ni perder lecturas). La pérdida de lecturas por problemas de red debe ser menor al 2% del total de muestras esperadas, gracias al repetidor WiFi. Cada lectura se almacena con fecha, hora y sector de origen. Los nodos deben operar sin interrupciones por más de 72 horas consecutivas en la prueba de campo.</p>
+
+<h4 class="subsub" id="s3-4-8"><span class="n">3.4.8.</span> Credibilidad de la aplicación</h4>
+<p>La confianza del usuario se sostiene sobre dos pilares: la <strong>latencia baja</strong> (menos de 5 segundos entre lectura y visualización, para que la alerta en tiempo real tenga sentido) y un <strong>indicador físico de estado</strong> en cada nodo (LED verde: OK / rojo: error) que permite ver si el sistema funciona sin abrir el dashboard.</p>
+
+<h4 class="subsub" id="s3-4-9"><span class="n">3.4.9.</span> Consideraciones de seguridad</h4>
+<p>Contraseñas almacenadas con hash (no en texto plano), sesiones con token (JWT), acceso restringido por rol, y el broker MQTT protegido (usuario/contraseña, y TLS en el puerto 8883 si el backend se aloja en la nube). Los datos ambientales no son sensibles a nivel personal, pero el acceso a la configuración y al control de los splits sí se restringe a la administradora.</p>
+
+<h3 class="sub" id="s3-5"><span class="n">3.5.</span> Suposiciones y dependencias</h3>
+<ul>
+<li>Se asume que la conexión a Internet del estudio (Claro Fibra 600 MB) se mantiene estable; el router está en la oficina central.</li>
+<li>El proyecto <strong>depende</strong> de instalar un repetidor WiFi antes de desplegar los nodos, porque la red actual solo cubre la oficina central (RHW06).</li>
+<li>Se asume disponibilidad de tomacorriente en todos los ambientes (confirmado en Bloque F), lo que evita el uso de batería.</li>
+<li>El control remoto de los splits depende de que los enchufes SmartThings queden correctamente vinculados a la cuenta Samsung del estudio.</li>
+<li>Se asume que Valeria está dispuesta a pagar si el ahorro se justifica (a confirmar el rango en entrevista).</li>
+</ul>
+
+<h3 class="sub" id="s3-6"><span class="n">3.6.</span> Evolución previsible del sistema</h3>
+<p>Mejoras identificadas para versiones futuras (surgen de las Limitaciones del apartado 4.1):</p>
+<ul>
+<li><strong>v2 - Apagado automático</strong> de splits con confirmación configurable y período de gracia, una vez validado el PIR en campo.</li>
+<li><strong>v2 - Sensor de CO₂ de mayor precisión</strong> (SCD40, NDIR) si el usuario requiere medición certificada.</li>
+<li><strong>v2 - Integración con un extractor de techo inteligente</strong> compatible con SmartThings para la oficina del fondo.</li>
+<li><strong>v3 - Publicación como PWA</strong> instalable en el celular sin tienda de aplicaciones.</li>
+<li><strong>Escalabilidad:</strong> agregar un nodo nuevo en otro ambiente en menos de 30 minutos, sin modificar el software (es un KR del Objetivo 4, replicabilidad).</li>
+</ul>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 4. REQUISITOS ESPECÍFICOS ══════ -->
+<h2 class="sec" id="s4"><span class="n">4.</span> Requisitos Específicos</h2>
+
+<h3 class="sub" id="s4-1"><span class="n">4.1.</span> Requerimientos funcionales <span class="bookref">Buenas Prácticas UTN p.59/60</span></h3>
+<p>Acciones concretas que el sistema debe poder realizar. Cada requerimiento indica su prioridad y el origen (síntoma o bloque de la entrevista del que surge). Los que dependen de hardware se marcan con <span class="tag hw">HW</span>.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ID</th><th>Requerimiento</th><th>Prioridad</th><th>Origen</th></tr></thead>
+<tbody>
+<tr><td class="rid">RF01</td><td><strong>Dashboard en tiempo real por ambiente.</strong><div class="origin">Muestra temperatura, humedad, CO₂ y luminosidad actuales de cada sector en una pantalla única.</div></td><td><span class="prio a">Alta</span></td><td>"No sé si está bien hasta que alguien se queja"</td></tr>
+<tr><td class="rid">RF02</td><td><strong>Historial de lecturas con gráfico temporal.</strong><div class="origin">Permite ver la evolución de cualquier variable en cualquier rango de fechas.</div></td><td><span class="prio a">Alta</span></td><td>Bloque G: "quiero número actual + histórico"</td></tr>
+<tr><td class="rid">RF03</td><td><strong>Alertas automáticas por umbral.</strong><div class="origin">Email o notificación push si temperatura, CO₂ o humedad superan los valores configurados.</div></td><td><span class="prio a">Alta</span></td><td>Bloque D + CO₂ en oficina del fondo</td></tr>
+<tr><td class="rid">RF04 <span class="tag hw">HW</span></td><td><strong>Alerta de equipo encendido sin ocupación + apagado remoto vía SmartThings.</strong><div class="origin">Si el PIR detecta que no hay personas y hay consumo activo, se genera una alerta. El usuario puede apagar el equipo desde la app Samsung SmartThings, sin ir al lugar.</div></td><td><span class="prio a">Alta</span></td><td>S2: splits viejos sin conectividad propia</td></tr>
+<tr><td class="rid">RF05 <span class="tag hw">HW</span></td><td><strong>Reporte mensual de consumo eléctrico por sector.</strong></td><td><span class="prio m">Media</span></td><td>"La factura subió mucho" + sensor SCT-013</td></tr>
+<tr><td class="rid">RF06</td><td><strong>Dos perfiles: administradora y empleado.</strong><div class="origin">Valeria: acceso total. Empleados: solo visualización, sin modificar umbrales.</div></td><td><span class="prio a">Alta</span></td><td>Bloque D: "solo yo debería poder cambiar los umbrales"</td></tr>
+<tr><td class="rid">RF07</td><td><strong>Configuración de umbrales desde el dashboard.</strong></td><td><span class="prio m">Media</span></td><td>Bloque D: "¿quién puede modificar los umbrales?"</td></tr>
+<tr><td class="rid">RF08</td><td><strong>Vista resumen para celular (acceso fuera del estudio).</strong></td><td><span class="prio m">Media</span></td><td>Bloque B: "celular para cuando estoy fuera"</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 class="subsub">Requerimientos no funcionales (RNF)</h4>
+<p>Condiciones de calidad, rendimiento y protocolos que el sistema debe cumplir (no son funcionalidades, sino cómo se comporta).</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ID</th><th>Requerimiento</th><th>Categoría</th></tr></thead>
+<tbody>
+<tr><td class="rid">RNF01</td><td><strong>El nodo ESP32 se reconecta solo si pierde la señal WiFi</strong> (reintento cada 30 s, sin reiniciar ni perder lecturas).</td><td>Firmware</td></tr>
+<tr><td class="rid">RNF02</td><td><strong>Latencia menor a 5 segundos</strong> entre lectura y visualización.</td><td>Rendimiento</td></tr>
+<tr><td class="rid">RNF03</td><td><strong>Accesible desde PC y celular sin instalar ninguna app.</strong></td><td>Usabilidad</td></tr>
+<tr><td class="rid">RNF04</td><td><strong>Interfaz sin jerga técnica</strong> (estado en lenguaje natural: "CO₂ elevado, ventile la sala").</td><td>Usabilidad / HCI</td></tr>
+<tr><td class="rid">RNF05</td><td><strong>Protocolo MQTT</strong> entre nodo y servidor.</td><td>Protocolos</td></tr>
+<tr><td class="rid">RNF06</td><td><strong>Cada lectura se almacena con fecha, hora y sector de origen.</strong></td><td>Datos</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 class="subsub">Limitaciones del alcance</h4>
+<p>Definen qué <strong>no</strong> hace el sistema en esta entrega. No son debilidades: son un contrato de honestidad con el usuario. Cada limitación puede convertirse en una versión futura (ver 3.6). Esta tabla se muestra y se discute explícitamente en la validación del prototipo, antes de la firma del contrato.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ID</th><th>Qué NO hace en esta entrega</th><th>Por qué</th><th>¿Versión futura?</th></tr></thead>
+<tbody>
+<tr><td class="rid">LIM01</td><td><strong>No apaga los splits de forma automática</strong> sin intervención humana. Detecta y alerta; Valeria decide.</td><td>Un apagado automático incorrecto (si el PIR falla con alguien quieto) puede causar problemas. Requiere validación en campo.</td><td>Sí. v2 con confirmación y período de gracia.</td></tr>
+<tr><td class="rid">LIM02</td><td><strong>No gestiona ventilación</strong> ni abre/cierra ventanas.</td><td>La oficina no tiene ventilación motorizada; instalar actuadores es obra aparte.</td><td>Sí. v2 con extractor SmartThings.</td></tr>
+<tr><td class="rid">LIM03</td><td><strong>No hay acceso remoto</strong> si el backend se aloja en una Raspberry Pi local.</td><td>El acceso desde fuera del estudio requiere backend en la nube.</td><td>Sí. Migración cloud directa.</td></tr>
+<tr><td class="rid">LIM04</td><td><strong>No incluye app móvil nativa.</strong> El acceso móvil es por navegador.</td><td>Una app nativa duplica el desarrollo y requiere cuentas de tienda.</td><td>Sí. v3 como PWA.</td></tr>
+<tr><td class="rid">LIM05</td><td><strong>No mide calidad del aire con precisión de laboratorio.</strong> El MQ-135 da valores orientativos.</td><td>Para el objetivo (detectar deterioro) alcanza; la certificación requiere otro sensor.</td><td>Sí. v2 con sensor SCD40 (NDIR).</td></tr>
+<tr><td class="rid">LIM06</td><td><strong>No incluye mantenimiento del hardware post-entrega.</strong></td><td>El alcance es académico; el mantenimiento se negocia aparte.</td><td>Sí. Acuerdo de soporte anual.</td></tr>
+<tr><td class="rid">LIM07</td><td><strong>No se integra con el software contable</strong> del estudio.</td><td>No fue solicitado y está fuera del alcance funcional.</td><td>No aplica.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub" id="s4-2"><span class="n">4.2.</span> Interfaces de usuario <span class="bookref">Buenas Prácticas UTN p.58</span></h3>
+<p>El único punto de contacto de Valeria y los empleados con el sistema es el <strong>dashboard web</strong>, diseñado con criterio de Interacción Humano-Computadora (HCI): la interfaz no se diseña por estética sino por usabilidad, según la formación y la comodidad tecnológica del usuario real (3/5). El estado se comunica en lenguaje natural, con semáforos de color y sin obligar a interpretar valores crudos. Es responsive (misma interfaz en PC y celular, sin instalar nada) y presenta una vista de estado actual, una vista de historial con gráficos, un panel de alertas activas y (solo para la administradora) la configuración de umbrales.</p>
+
+<h4 class="subsub" id="s4-2-1"><span class="n">4.2.1.</span> Diseño de interfaz (Figma)</h4>
+<p>Antes de programar, el equipo diseña el mockup interactivo en Figma y lo valida con Valeria; el feedback se registra como hito en el control de cambios (Lineamientos 2026).</p>
+<div class="deliverable"><span class="d-t">Entregable del equipo</span>Insertar las imágenes del mockup de Figma con el hipervínculo al prototipo dentro del texto explicativo. (Reemplazar este bloque por las capturas + link.)</div>
+
+<h3 class="sub" id="s4-3"><span class="n">4.3.</span> Interfaces de hardware <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
+<p>Requerimientos que condicionan el diseño físico del nodo y de la instalación (marcados <span class="tag hw">HW</span>). Definen forma, alimentación, ubicación y prerequisitos de infraestructura.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ID</th><th>Requerimiento</th><th>Prioridad</th><th>Origen</th></tr></thead>
+<tbody>
+<tr><td class="rid">RHW01</td><td><strong>Nodo compacto y montable en pared</strong> (máx. ~10×8×4 cm, sin cables colgando).</td><td><span class="prio a">Alta</span></td><td>Bloque F: "es un estudio de atención a clientes, el aspecto importa"</td></tr>
+<tr><td class="rid">RHW02</td><td><strong>Alimentación por USB-C desde tomacorriente</strong> (sin batería).</td><td><span class="prio a">Alta</span></td><td>Bloque F: "hay tomacorrientes en todos los ambientes"</td></tr>
+<tr><td class="rid">RHW03</td><td><strong>Sensor de temperatura lejos de fuentes de calor</strong> (mín. 50 cm de impresoras, lejos de sol directo).</td><td><span class="prio a">Alta</span></td><td>Bloque E: impresoras láser en recepción y sala de reuniones</td></tr>
+<tr><td class="rid">RHW04</td><td><strong>Carcasa 3D con ventilación para el MQ-135</strong> (no puede ser hermética).</td><td><span class="prio m">Media</span></td><td>Restricción técnica del sensor MQ-135</td></tr>
+<tr><td class="rid">RHW05</td><td><strong>LED de estado visible</strong> (verde: OK / rojo: error).</td><td><span class="prio b">Baja</span></td><td>HCI: saber si el nodo funciona sin abrir el dashboard</td></tr>
+<tr><td class="rid">RHW06</td><td><strong>Repetidor WiFi antes de desplegar los nodos.</strong><div class="origin">La red actual solo cubre la oficina central (router). Es un prerequisito de infraestructura.</div></td><td><span class="prio a">Alta</span></td><td>Bloque B: "la red WiFi no llega a los demás ambientes"</td></tr>
+<tr><td class="rid">RHW07</td><td><strong>Enchufe inteligente SmartThings por split.</strong><div class="origin">Se coloca entre el tomacorriente y el split (equipos viejos sin conectividad propia) para apagarlo remotamente.</div></td><td><span class="prio a">Alta</span></td><td>S2 + Valeria/empleados usan Samsung con SmartThings</td></tr>
+</tbody>
+</table>
+</div>
+<div class="box hw"><span class="box-t">Variables medidas y componentes</span>Temperatura y humedad (DHT22, cada 30 s), CO₂/aire (MQ-135, cada 60 s), luminosidad (BH1750, cada 60 s), presencia (PIR HC-SR501) y consumo eléctrico (SCT-013, por circuito). El tipo y la cantidad de sensores se definen después de la entrevista, no antes.</div>
+
+<h4 class="subsub" id="s4-3-1"><span class="n">4.3.1.</span> Visualización 3D del producto</h4>
+<p>La carcasa del nodo se modela en 3D (Tinkercad o Fusion 360) antes de fabricarla, respetando RHW01 (dimensiones y prolijidad) y RHW04 (ventilación para el MQ-135).</p>
+<div class="deliverable"><span class="d-t">Entregable del equipo</span>Insertar las imágenes del diseño 3D del nodo con el hipervínculo al modelo dentro del texto explicativo.</div>
+
+<h3 class="sub" id="s4-4"><span class="n">4.4.</span> Interfaces de software <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
+<p>Componentes de software del sistema y cómo se comunican entre sí. No es lo mismo que los RNF (rendimiento y protocolos) ni que los RF (funcionalidades).</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ID</th><th>Componente</th><th>Tecnología / Stack</th><th>Rol en el sistema</th></tr></thead>
+<tbody>
+<tr><td class="rid">ISW01</td><td><strong>Firmware del nodo</strong><div class="origin">Corre en cada ESP32: lee sensores, gestiona la red y publica datos.</div></td><td>C++ / Arduino. Librerías: DHT, PubSubClient (MQTT), ArduinoJSON, WiFiManager.</td><td>Capa de adquisición. Publica en el topic MQTT del ambiente.</td></tr>
+<tr><td class="rid">ISW02</td><td><strong>Broker MQTT</strong><div class="origin">Intermediario entre nodos y backend.</div></td><td>Mosquitto (Eclipse). MQTT 3.1.1, puerto 1883 (u 8883 con TLS).</td><td>Desacopla nodos y backend. Puede alojarse junto al backend.</td></tr>
+<tr><td class="rid">ISW03</td><td><strong>Backend / API REST</strong><div class="origin">Suscribe al broker, persiste lecturas y expone la API.</div></td><td>Node.js + Express. ORM: Prisma o pg. Auth: JWT.</td><td>Lógica de negocio. Evalúa umbrales y dispara alertas.</td></tr>
+<tr><td class="rid">ISW04</td><td><strong>Base de datos</strong><div class="origin">Lecturas con timestamp y sector, umbrales y usuarios.</div></td><td>PostgreSQL. Opcional: TimescaleDB para series temporales.</td><td>Persistencia central. El historial (RF02) y los reportes (RF05) dependen de esta capa. Modelo detallado en 4.6.</td></tr>
+<tr><td class="rid">ISW05</td><td><strong>Dashboard web (Frontend)</strong><div class="origin">Consume la API REST. Tiempo real, historial, alertas y configuración.</div></td><td>React + Vite. Gráficos: Recharts / Chart.js. Estilos: Tailwind. Responsive.</td><td>Capa de presentación. Diseñada en Figma antes de programarse (4.2.1).</td></tr>
+<tr><td class="rid">ISW06</td><td><strong>Integración Samsung SmartThings</strong><div class="origin">Envía comandos de encendido/apagado a los enchufes.</div></td><td>SmartThings REST API. OAuth 2.0. api.smartthings.com/v1/devices/{id}/commands</td><td>Permite apagar un split ante anomalía, o avisar a Valeria para que lo haga.</td></tr>
+<tr><td class="rid">ISW07</td><td><strong>Servicio de alertas</strong><div class="origin">Evalúa lecturas contra umbrales y notifica al canal del usuario.</div></td><td>Nodemailer (email) y/o OneSignal (push).</td><td>Implementa RF03. Proceso background; no requiere el dashboard abierto.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="flow">
+  <span class="node">Sensor</span><span class="arr">→</span><span class="node">ESP32 · ISW01</span><span class="arr">→ MQTT →</span><span class="node">Broker · ISW02</span><span class="arr">→</span><span class="node">Backend · ISW03</span><span class="arr">→</span><span class="node">PostgreSQL · ISW04</span><span class="arr">→ REST →</span><span class="node">Dashboard · ISW05</span>
+</div>
+
+<h3 class="sub" id="s4-5"><span class="n">4.5.</span> Interfaces de comunicación <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
+<p>Cómo interactúa el sistema con otras aplicaciones, APIs y bases de datos.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Interfaz</th><th>Protocolo / Formato</th><th>Detalle</th></tr></thead>
+<tbody>
+<tr><td><strong>Nodo → Backend</strong></td><td>MQTT 3.1.1 (JSON)</td><td>Cada nodo publica sus lecturas en un topic por ambiente. Puerto 1883 (u 8883 con TLS en la nube).</td></tr>
+<tr><td><strong>Backend → Dashboard</strong></td><td>HTTP / REST (JSON)</td><td>Endpoints GET/POST autenticados con JWT para estado actual, historial, alertas y umbrales.</td></tr>
+<tr><td><strong>Backend → SmartThings</strong></td><td>HTTPS / REST + OAuth 2.0</td><td>Comandos a los enchufes inteligentes de los splits (encender/apagar).</td></tr>
+<tr><td><strong>Backend → Base de datos</strong></td><td>TCP / SQL (Postgres)</td><td>Conexión a PostgreSQL vía ORM (Prisma) o driver pg. Puerto 5432.</td></tr>
+<tr><td><strong>Servicio de alertas → Usuario</strong></td><td>SMTP (email) / HTTPS push</td><td>Notificaciones por email (Nodemailer) o push (OneSignal) según preferencia del usuario.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub" id="s4-6"><span class="n">4.6.</span> Modelo Entidad-Relación de la base de datos</h3>
+<p>Modelo de datos relacional que sostiene la persistencia del sistema (componente ISW04). Representa qué guarda el sistema y cómo se relacionan las entidades: los <strong>ambientes</strong> del estudio, los <strong>nodos</strong> físicos instalados en cada uno, los <strong>sensores</strong> que integra cada nodo y las <strong>lecturas</strong> que generan; los <strong>umbrales</strong> que configura la administradora, las <strong>alertas</strong> que se disparan cuando una lectura los supera, y los <strong>enchufes inteligentes</strong> con el registro de <strong>comandos</strong> de encendido/apagado. El color de cada entidad sigue la convención del proyecto: azul para la lógica del sistema, violeta para lo vinculado al hardware y verde para el dato de alto volumen.</p>
+
+<div class="er-fig">
+<svg viewBox="0 0 1120 820" xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <style>
+      .ent{fill:#ffffff;stroke-width:1.5;}
+      .hd{font-weight:700;font-size:13px;fill:#ffffff;}
+      .at{font-size:11.5px;fill:#3a3a3a;}
+      .pk{font-size:11.5px;fill:#0f0f0f;font-weight:600;text-decoration:underline;}
+      .fk{font-size:11.5px;fill:#3a3a3a;font-style:italic;}
+      .kl{font-size:9px;fill:#8a8a8a;font-weight:600;}
+      .rel{fill:none;stroke:#6b6b6b;stroke-width:1.4;}
+      .card{font-size:11px;fill:#1a3a5c;font-weight:700;}
+      .verb{font-size:10px;fill:#8a6a2a;font-style:italic;}
+      .dot{fill:#6b6b6b;}
+    </style>
+  </defs>
+
+  <!-- ═══ RELACIONES (debajo de las cajas) ═══ -->
+  <!-- R1 AMBIENTE-NODO contiene -->
+  <polyline class="rel" points="650,94 765,94 765,103 880,103"/>
+  <text class="card" x="660" y="88">1</text><text class="card" x="862" y="98">N</text>
+  <text class="verb" x="700" y="88">contiene</text>
+  <!-- R2 NODO-SENSOR integra -->
+  <polyline class="rel" points="980,166 980,300"/>
+  <text class="card" x="986" y="184">1</text><text class="card" x="986" y="294">N</text>
+  <text class="verb" x="986" y="238">integra</text>
+  <!-- R3 SENSOR-LECTURA registra -->
+  <polyline class="rel" points="980,426 980,560"/>
+  <text class="card" x="986" y="444">1</text><text class="card" x="986" y="554">N</text>
+  <text class="verb" x="986" y="498">registra</text>
+  <!-- R4 AMBIENTE-UMBRAL define -->
+  <polyline class="rel" points="520,148 520,250 130,250 130,340"/>
+  <text class="card" x="528" y="166">1</text><text class="card" x="138" y="334">N</text>
+  <text class="verb" x="300" y="243">define</text>
+  <!-- R5 USUARIO-UMBRAL configura -->
+  <polyline class="rel" points="90,166 90,340"/>
+  <text class="card" x="96" y="184">1</text><text class="card" x="96" y="334">N</text>
+  <text class="verb" x="96" y="258">configura</text>
+  <!-- R6 UMBRAL-ALERTA origina -->
+  <polyline class="rel" points="90,466 90,620"/>
+  <text class="card" x="96" y="484">1</text><text class="card" x="96" y="614">N</text>
+  <text class="verb" x="96" y="548">origina</text>
+  <!-- R7 LECTURA-ALERTA dispara -->
+  <polyline class="rel" points="880,610 820,610 820,785 170,785 170,746"/>
+  <text class="card" x="852" y="604">1</text><text class="card" x="150" y="762">N</text>
+  <text class="verb" x="470" y="780">dispara</text>
+  <!-- R8 AMBIENTE-ENCHUFE tiene -->
+  <polyline class="rel" points="580,148 580,340"/>
+  <text class="card" x="586" y="166">1</text><text class="card" x="586" y="334">N</text>
+  <text class="verb" x="586" y="250">tiene</text>
+  <!-- R9 ENCHUFE-COMANDO recibe -->
+  <polyline class="rel" points="550,448 550,620"/>
+  <text class="card" x="556" y="466">1</text><text class="card" x="556" y="614">N</text>
+  <text class="verb" x="556" y="540">recibe</text>
+  <!-- R10 USUARIO-COMANDO ejecuta -->
+  <polyline class="rel" points="230,120 350,120 350,660 450,660"/>
+  <text class="card" x="250" y="114">1</text><text class="card" x="432" y="654">N</text>
+  <text class="verb" x="358" y="400">ejecuta</text>
+
+  <!-- ═══ ENTIDADES ═══ -->
+  <!-- USUARIO -->
+  <rect class="ent" x="30" y="40" width="200" height="126" stroke="#1a3a5c"/>
+  <rect x="30" y="40" width="200" height="28" fill="#1a3a5c"/>
+  <text class="hd" x="130" y="59" text-anchor="middle">USUARIO</text>
+  <text class="pk" x="42" y="90">id_usuario</text><text class="kl" x="220" y="90" text-anchor="end">PK</text>
+  <text class="at" x="42" y="108">nombre</text>
+  <text class="at" x="42" y="126">email</text>
+  <text class="at" x="42" y="144">rol</text>
+  <text class="at" x="42" y="162">password_hash</text>
+
+  <!-- AMBIENTE -->
+  <rect class="ent" x="450" y="40" width="200" height="108" stroke="#1a3a5c"/>
+  <rect x="450" y="40" width="200" height="28" fill="#1a3a5c"/>
+  <text class="hd" x="550" y="59" text-anchor="middle">AMBIENTE</text>
+  <text class="pk" x="462" y="90">id_ambiente</text><text class="kl" x="640" y="90" text-anchor="end">PK</text>
+  <text class="at" x="462" y="108">nombre</text>
+  <text class="at" x="462" y="126">superficie_m2</text>
+  <text class="at" x="462" y="144">ubicacion</text>
+
+  <!-- NODO -->
+  <rect class="ent" x="880" y="40" width="200" height="126" stroke="#6b21a8"/>
+  <rect x="880" y="40" width="200" height="28" fill="#6b21a8"/>
+  <text class="hd" x="980" y="59" text-anchor="middle">NODO</text>
+  <text class="pk" x="892" y="90">id_nodo</text><text class="kl" x="1070" y="90" text-anchor="end">PK</text>
+  <text class="fk" x="892" y="108">id_ambiente</text><text class="kl" x="1070" y="108" text-anchor="end">FK</text>
+  <text class="at" x="892" y="126">mac</text>
+  <text class="at" x="892" y="144">estado</text>
+  <text class="at" x="892" y="162">version_firmware</text>
+
+  <!-- SENSOR -->
+  <rect class="ent" x="880" y="300" width="200" height="126" stroke="#6b21a8"/>
+  <rect x="880" y="300" width="200" height="28" fill="#6b21a8"/>
+  <text class="hd" x="980" y="319" text-anchor="middle">SENSOR</text>
+  <text class="pk" x="892" y="350">id_sensor</text><text class="kl" x="1070" y="350" text-anchor="end">PK</text>
+  <text class="fk" x="892" y="368">id_nodo</text><text class="kl" x="1070" y="368" text-anchor="end">FK</text>
+  <text class="at" x="892" y="386">tipo</text>
+  <text class="at" x="892" y="404">modelo</text>
+  <text class="at" x="892" y="422">intervalo_seg</text>
+
+  <!-- LECTURA -->
+  <rect class="ent" x="880" y="560" width="200" height="108" stroke="#2d6a4f"/>
+  <rect x="880" y="560" width="200" height="28" fill="#2d6a4f"/>
+  <text class="hd" x="980" y="579" text-anchor="middle">LECTURA</text>
+  <text class="pk" x="892" y="610">id_lectura</text><text class="kl" x="1070" y="610" text-anchor="end">PK</text>
+  <text class="fk" x="892" y="628">id_sensor</text><text class="kl" x="1070" y="628" text-anchor="end">FK</text>
+  <text class="at" x="892" y="646">valor</text>
+  <text class="at" x="892" y="664">timestamp</text>
+
+  <!-- ENCHUFE_INT -->
+  <rect class="ent" x="450" y="340" width="200" height="108" stroke="#6b21a8"/>
+  <rect x="450" y="340" width="200" height="28" fill="#6b21a8"/>
+  <text class="hd" x="550" y="359" text-anchor="middle">ENCHUFE_INT.</text>
+  <text class="pk" x="462" y="390">id_enchufe</text><text class="kl" x="640" y="390" text-anchor="end">PK</text>
+  <text class="fk" x="462" y="408">id_ambiente</text><text class="kl" x="640" y="408" text-anchor="end">FK</text>
+  <text class="at" x="462" y="426">st_device_id</text>
+  <text class="at" x="462" y="444">estado</text>
+
+  <!-- COMANDO -->
+  <rect class="ent" x="450" y="620" width="200" height="126" stroke="#1a3a5c"/>
+  <rect x="450" y="620" width="200" height="28" fill="#1a3a5c"/>
+  <text class="hd" x="550" y="639" text-anchor="middle">COMANDO</text>
+  <text class="pk" x="462" y="670">id_comando</text><text class="kl" x="640" y="670" text-anchor="end">PK</text>
+  <text class="fk" x="462" y="688">id_enchufe</text><text class="kl" x="640" y="688" text-anchor="end">FK</text>
+  <text class="fk" x="462" y="706">id_usuario</text><text class="kl" x="640" y="706" text-anchor="end">FK</text>
+  <text class="at" x="462" y="724">accion</text>
+  <text class="at" x="462" y="742">timestamp</text>
+
+  <!-- UMBRAL -->
+  <rect class="ent" x="30" y="340" width="200" height="126" stroke="#1a3a5c"/>
+  <rect x="30" y="340" width="200" height="28" fill="#1a3a5c"/>
+  <text class="hd" x="130" y="359" text-anchor="middle">UMBRAL</text>
+  <text class="pk" x="42" y="390">id_umbral</text><text class="kl" x="220" y="390" text-anchor="end">PK</text>
+  <text class="fk" x="42" y="408">id_ambiente</text><text class="kl" x="220" y="408" text-anchor="end">FK</text>
+  <text class="fk" x="42" y="426">id_usuario</text><text class="kl" x="220" y="426" text-anchor="end">FK</text>
+  <text class="at" x="42" y="444">tipo_variable</text>
+  <text class="at" x="42" y="462">valor_min / valor_max</text>
+
+  <!-- ALERTA -->
+  <rect class="ent" x="30" y="620" width="200" height="126" stroke="#1a3a5c"/>
+  <rect x="30" y="620" width="200" height="28" fill="#1a3a5c"/>
+  <text class="hd" x="130" y="639" text-anchor="middle">ALERTA</text>
+  <text class="pk" x="42" y="670">id_alerta</text><text class="kl" x="220" y="670" text-anchor="end">PK</text>
+  <text class="fk" x="42" y="688">id_umbral</text><text class="kl" x="220" y="688" text-anchor="end">FK</text>
+  <text class="fk" x="42" y="706">id_lectura</text><text class="kl" x="220" y="706" text-anchor="end">FK</text>
+  <text class="at" x="42" y="724">estado</text>
+  <text class="at" x="42" y="742">timestamp</text>
+
+  <!-- endpoints dots -->
+  <circle class="dot" cx="650" cy="94" r="3"/><circle class="dot" cx="880" cy="103" r="3"/>
+  <circle class="dot" cx="980" cy="166" r="3"/><circle class="dot" cx="980" cy="300" r="3"/>
+  <circle class="dot" cx="980" cy="426" r="3"/><circle class="dot" cx="980" cy="560" r="3"/>
+  <circle class="dot" cx="520" cy="148" r="3"/><circle class="dot" cx="130" cy="340" r="3"/>
+  <circle class="dot" cx="90" cy="166" r="3"/><circle class="dot" cx="90" cy="340" r="3"/>
+  <circle class="dot" cx="90" cy="466" r="3"/><circle class="dot" cx="90" cy="620" r="3"/>
+  <circle class="dot" cx="880" cy="610" r="3"/><circle class="dot" cx="170" cy="746" r="3"/>
+  <circle class="dot" cx="580" cy="148" r="3"/><circle class="dot" cx="580" cy="340" r="3"/>
+  <circle class="dot" cx="550" cy="448" r="3"/><circle class="dot" cx="550" cy="620" r="3"/>
+  <circle class="dot" cx="230" cy="120" r="3"/><circle class="dot" cx="450" cy="660" r="3"/>
+</svg>
+</div>
+<div class="figcap">Figura 1. Diagrama Entidad-Relación de SensorOffice. Cardinalidad máxima (1 : N) en los extremos de cada vínculo.</div>
+
+<div class="pill-row">
+  <span class="pill">PK · clave primaria</span>
+  <span class="pill">FK · clave foránea</span>
+  <span class="pill">1 : N · uno a muchos</span>
+  <span class="pill" style="background:var(--info-bg);color:var(--info-tx);border-color:var(--info-bd);">Azul · lógica del sistema</span>
+  <span class="pill" style="background:var(--hw-box-bg);color:var(--hw-box-tx);border-color:var(--hw-box-bd);">Violeta · hardware</span>
+  <span class="pill" style="background:var(--ok-bg);color:var(--ok-tx);border-color:var(--ok-bd);">Verde · datos de alto volumen</span>
+</div>
+
+<h4 class="subsub">Entidades</h4>
+<div class="deflist">
+  <div class="d-row"><div class="d-k">USUARIO</div><div class="d-v">Personas con acceso al sistema. El campo <code class="ic">rol</code> distingue administradora (Valeria) de empleado (visor).</div></div>
+  <div class="d-row"><div class="d-k">AMBIENTE</div><div class="d-v">Cada sector u oficina del estudio que se monitorea (es el eje del modelo).</div></div>
+  <div class="d-row"><div class="d-k">NODO</div><div class="d-v">Unidad física ESP32 instalada en un ambiente. Guarda su MAC, estado y versión de firmware.</div></div>
+  <div class="d-row"><div class="d-k">SENSOR</div><div class="d-v">Cada sensor que integra un nodo (temperatura, humedad, CO₂, luminosidad, presencia, consumo), con su modelo e intervalo de muestreo.</div></div>
+  <div class="d-row"><div class="d-k">LECTURA</div><div class="d-v">Muestra individual de un sensor (valor + timestamp). Es la tabla de mayor volumen y sostiene el historial (RF02).</div></div>
+  <div class="d-row"><div class="d-k">UMBRAL</div><div class="d-v">Rango configurado por la administradora para una variable en un ambiente. Su superación origina alertas.</div></div>
+  <div class="d-row"><div class="d-k">ALERTA</div><div class="d-v">Evento generado cuando una lectura viola un umbral. Referencia al umbral y a la lectura que la disparó (trazabilidad).</div></div>
+  <div class="d-row"><div class="d-k">ENCHUFE_INT.</div><div class="d-v">Enchufe inteligente SmartThings asociado al split de un ambiente. Guarda su id de dispositivo y estado.</div></div>
+  <div class="d-row"><div class="d-k">COMANDO</div><div class="d-v">Registro de cada encendido/apagado enviado a un enchufe, con el usuario que lo ejecutó y el origen (manual o automático).</div></div>
+</div>
+
+<h4 class="subsub">Relaciones</h4>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Entidad</th><th>Card.</th><th>Entidad</th><th>Significado</th></tr></thead>
+<tbody>
+<tr><td>AMBIENTE</td><td>1 : N</td><td>NODO</td><td>Un ambiente contiene uno o más nodos.</td></tr>
+<tr><td>NODO</td><td>1 : N</td><td>SENSOR</td><td>Un nodo integra varios sensores.</td></tr>
+<tr><td>SENSOR</td><td>1 : N</td><td>LECTURA</td><td>Un sensor registra muchas lecturas en el tiempo.</td></tr>
+<tr><td>AMBIENTE</td><td>1 : N</td><td>UMBRAL</td><td>Un ambiente define umbrales por variable.</td></tr>
+<tr><td>USUARIO</td><td>1 : N</td><td>UMBRAL</td><td>La administradora configura los umbrales.</td></tr>
+<tr><td>UMBRAL</td><td>1 : N</td><td>ALERTA</td><td>Un umbral superado origina alertas.</td></tr>
+<tr><td>LECTURA</td><td>1 : N</td><td>ALERTA</td><td>La lectura que viola el umbral dispara la alerta.</td></tr>
+<tr><td>AMBIENTE</td><td>1 : N</td><td>ENCHUFE_INT.</td><td>Un ambiente tiene enchufes inteligentes (uno por split).</td></tr>
+<tr><td>ENCHUFE_INT.</td><td>1 : N</td><td>COMANDO</td><td>Un enchufe recibe muchos comandos.</td></tr>
+<tr><td>USUARIO</td><td>1 : N</td><td>COMANDO</td><td>Un usuario ejecuta los comandos de apagado/encendido.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 class="subsub">Esquema relacional (PostgreSQL)</h4>
+<p>Definición de tablas (DDL) que materializa el modelo. Sirve como diccionario de datos con tipos y claves.</p>
+<pre><span class="cm">-- Usuarios del sistema (admin / empleado)</span>
+<span class="kw">CREATE TABLE</span> usuario (
+  id_usuario     <span class="ty">SERIAL PRIMARY KEY</span>,
+  nombre         <span class="ty">VARCHAR</span>(80)  <span class="kw">NOT NULL</span>,
+  email          <span class="ty">VARCHAR</span>(120) <span class="kw">NOT NULL UNIQUE</span>,
+  password_hash  <span class="ty">VARCHAR</span>(255) <span class="kw">NOT NULL</span>,
+  rol            <span class="ty">VARCHAR</span>(20)  <span class="kw">NOT NULL DEFAULT</span> <span class="st">'empleado'</span>
+                 <span class="kw">CHECK</span> (rol <span class="kw">IN</span> (<span class="st">'admin'</span>,<span class="st">'empleado'</span>)),
+  activo         <span class="ty">BOOLEAN</span> <span class="kw">NOT NULL DEFAULT</span> <span class="kw">TRUE</span>
+);
+
+<span class="cm">-- Ambientes / sectores del estudio</span>
+<span class="kw">CREATE TABLE</span> ambiente (
+  id_ambiente    <span class="ty">SERIAL PRIMARY KEY</span>,
+  nombre         <span class="ty">VARCHAR</span>(80) <span class="kw">NOT NULL</span>,
+  superficie_m2  <span class="ty">NUMERIC</span>(6,2),
+  ubicacion      <span class="ty">VARCHAR</span>(120)
+);
+
+<span class="cm">-- Nodos ESP32 (uno o varios por ambiente)</span>
+<span class="kw">CREATE TABLE</span> nodo (
+  id_nodo          <span class="ty">SERIAL PRIMARY KEY</span>,
+  id_ambiente      <span class="ty">INT</span> <span class="kw">NOT NULL REFERENCES</span> ambiente(id_ambiente),
+  mac              <span class="ty">VARCHAR</span>(17) <span class="kw">NOT NULL UNIQUE</span>,
+  estado           <span class="ty">VARCHAR</span>(12) <span class="kw">NOT NULL DEFAULT</span> <span class="st">'offline'</span>
+                   <span class="kw">CHECK</span> (estado <span class="kw">IN</span> (<span class="st">'ok'</span>,<span class="st">'error'</span>,<span class="st">'offline'</span>)),
+  version_firmware <span class="ty">VARCHAR</span>(20),
+  fecha_instalacion <span class="ty">DATE</span>
+);
+
+<span class="cm">-- Sensores que integra cada nodo</span>
+<span class="kw">CREATE TABLE</span> sensor (
+  id_sensor     <span class="ty">SERIAL PRIMARY KEY</span>,
+  id_nodo       <span class="ty">INT</span> <span class="kw">NOT NULL REFERENCES</span> nodo(id_nodo),
+  tipo          <span class="ty">VARCHAR</span>(20) <span class="kw">NOT NULL</span>   <span class="cm">-- temperatura, humedad, co2, luminosidad, presencia, consumo</span>,
+  modelo        <span class="ty">VARCHAR</span>(20),          <span class="cm">-- DHT22, MQ-135, BH1750, PIR, SCT-013</span>
+  unidad        <span class="ty">VARCHAR</span>(10),
+  intervalo_seg <span class="ty">INT</span> <span class="kw">NOT NULL DEFAULT</span> 60
+);
+
+<span class="cm">-- Lecturas (alto volumen; candidata a TimescaleDB)</span>
+<span class="kw">CREATE TABLE</span> lectura (
+  id_lectura  <span class="ty">BIGSERIAL PRIMARY KEY</span>,
+  id_sensor   <span class="ty">INT</span> <span class="kw">NOT NULL REFERENCES</span> sensor(id_sensor),
+  valor       <span class="ty">NUMERIC</span>(10,2) <span class="kw">NOT NULL</span>,
+  timestamp   <span class="ty">TIMESTAMPTZ</span> <span class="kw">NOT NULL DEFAULT</span> now()
+);
+<span class="kw">CREATE INDEX</span> idx_lectura_sensor_ts <span class="kw">ON</span> lectura (id_sensor, timestamp);
+
+<span class="cm">-- Umbrales configurados por la administradora</span>
+<span class="kw">CREATE TABLE</span> umbral (
+  id_umbral        <span class="ty">SERIAL PRIMARY KEY</span>,
+  id_ambiente      <span class="ty">INT</span> <span class="kw">NOT NULL REFERENCES</span> ambiente(id_ambiente),
+  id_usuario_config <span class="ty">INT</span> <span class="kw">NOT NULL REFERENCES</span> usuario(id_usuario),
+  tipo_variable    <span class="ty">VARCHAR</span>(20) <span class="kw">NOT NULL</span>,
+  valor_min        <span class="ty">NUMERIC</span>(10,2),
+  valor_max        <span class="ty">NUMERIC</span>(10,2),
+  fecha_config     <span class="ty">TIMESTAMPTZ</span> <span class="kw">NOT NULL DEFAULT</span> now()
+);
+
+<span class="cm">-- Alertas disparadas al violarse un umbral</span>
+<span class="kw">CREATE TABLE</span> alerta (
+  id_alerta   <span class="ty">SERIAL PRIMARY KEY</span>,
+  id_umbral   <span class="ty">INT</span> <span class="kw">NOT NULL REFERENCES</span> umbral(id_umbral),
+  id_lectura  <span class="ty">BIGINT</span> <span class="kw">REFERENCES</span> lectura(id_lectura),
+  mensaje     <span class="ty">VARCHAR</span>(160),
+  estado      <span class="ty">VARCHAR</span>(12) <span class="kw">NOT NULL DEFAULT</span> <span class="st">'activa'</span>
+              <span class="kw">CHECK</span> (estado <span class="kw">IN</span> (<span class="st">'activa'</span>,<span class="st">'resuelta'</span>)),
+  timestamp   <span class="ty">TIMESTAMPTZ</span> <span class="kw">NOT NULL DEFAULT</span> now()
+);
+
+<span class="cm">-- Enchufes inteligentes SmartThings (uno por split)</span>
+<span class="kw">CREATE TABLE</span> enchufe_inteligente (
+  id_enchufe    <span class="ty">SERIAL PRIMARY KEY</span>,
+  id_ambiente   <span class="ty">INT</span> <span class="kw">NOT NULL REFERENCES</span> ambiente(id_ambiente),
+  st_device_id  <span class="ty">VARCHAR</span>(80) <span class="kw">NOT NULL</span>,
+  nombre        <span class="ty">VARCHAR</span>(60),
+  estado        <span class="ty">VARCHAR</span>(10) <span class="kw">NOT NULL DEFAULT</span> <span class="st">'apagado'</span>
+);
+
+<span class="cm">-- Comandos de encendido/apagado (trazabilidad)</span>
+<span class="kw">CREATE TABLE</span> comando (
+  id_comando  <span class="ty">SERIAL PRIMARY KEY</span>,
+  id_enchufe  <span class="ty">INT</span> <span class="kw">NOT NULL REFERENCES</span> enchufe_inteligente(id_enchufe),
+  id_usuario  <span class="ty">INT</span> <span class="kw">REFERENCES</span> usuario(id_usuario),
+  accion      <span class="ty">VARCHAR</span>(10) <span class="kw">NOT NULL CHECK</span> (accion <span class="kw">IN</span> (<span class="st">'encender'</span>,<span class="st">'apagar'</span>)),
+  origen      <span class="ty">VARCHAR</span>(10) <span class="kw">NOT NULL DEFAULT</span> <span class="st">'manual'</span>,
+  timestamp   <span class="ty">TIMESTAMPTZ</span> <span class="kw">NOT NULL DEFAULT</span> now()
+);</pre>
+
+<div class="box info"><span class="box-t">Reporte de consumo (RF05)</span>El reporte mensual de consumo por sector no es una tabla nueva: se resuelve como una <strong>vista</strong> (o consulta agregada) sobre <code class="ic">lectura</code>, filtrando los sensores de tipo <code class="ic">consumo</code> y agrupando por ambiente y mes. Así se evita duplicar datos y el reporte siempre refleja las lecturas reales.</div>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 5. OFERTA DE GESTIÓN ══════ -->
+<h2 class="sec" id="s5"><span class="n">5.</span> Oferta de Gestión</h2>
+
+<h3 class="sub" id="s5-1"><span class="n">5.1.</span> GANTT</h3>
+<p>Cronograma de tareas, responsables y duración estimada, organizado por las etapas del proyecto (E01 a E06). El GANTT se lleva en Notion / Google Sheets y se actualiza a medida que avanza el proyecto.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Etapa</th><th>Tareas principales</th><th>Entregable</th></tr></thead>
+<tbody>
+<tr><td class="rid">E01</td><td>Primera entrevista (bloques A-C), identificación del problema real y línea de base.</td><td>Definición del problema, síntomas vs. causas.</td></tr>
+<tr><td class="rid">E02</td><td>Segunda entrevista (bloques D-G), relevamiento del entorno físico e instalación. Factibilidad técnica, económica y de gestión.</td><td>Estudio de factibilidad, requerimientos preliminares.</td></tr>
+<tr><td class="rid">E03</td><td>Diseño del sistema: RF/RNF/RHW/ISW, arquitectura, modelo de datos (4.6).</td><td>Especificación de requerimientos + ER.</td></tr>
+<tr><td class="rid">E04</td><td>Prototipado: mockup Figma, diseño 3D del nodo, armado del primer nodo y prueba del enchufe SmartThings. Validación con Valeria.</td><td>Mockup validado + nodo prototipo.</td></tr>
+<tr><td class="rid">E05</td><td>Desarrollo: firmware, backend, base de datos, dashboard, alertas e integración SmartThings. Instalación del repetidor y los nodos. Documentación.</td><td>Sistema funcionando + documentación completa.</td></tr>
+<tr><td class="rid">E06</td><td>Presentación profesional, defensa y pitch de negocio.</td><td>Presentación final + landing.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="deliverable"><span class="d-t">Entregable del equipo</span>Insertar la imagen del GANTT con el hipervínculo de Notion / Sheets dentro del texto explicativo, con fechas y responsables reales.</div>
+
+<h3 class="sub" id="s5-2"><span class="n">5.2.</span> Infraestructura administrativa <span class="bookref">Buenas Prácticas UTN p.62</span></h3>
+<p>Organización interna del equipo y herramientas de trabajo. Siguiendo el esquema del libro UTN, el equipo se organiza en un grupo de dirección/gestión y un grupo de desarrollo, adaptado a la escala del proyecto de 7mo.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Grupo</th><th>Rol</th><th>Función</th></tr></thead>
+<tbody>
+<tr><td rowspan="2"><strong>Dirección y Gestión</strong></td><td>Director / PM</td><td>Cuestiones globales del proyecto, coordinación y obtención de recursos, relación con el cliente.</td></tr>
+<tr><td>Líder de proyecto</td><td>Gestión de recursos y asignación de tareas; planificación temporal y económica.</td></tr>
+<tr><td rowspan="3"><strong>Desarrollo</strong></td><td>Backend / BD / Red</td><td>Servidor, base de datos, MQTT, integración y cobertura de red.</td></tr>
+<tr><td>Frontend / UX-UI</td><td>Dashboard, mockup y validación de interfaz.</td></tr>
+<tr><td>MCU / Instalador <span class="tag hw">HW</span></td><td>Firmware, sensores, diseño 3D e instalación física.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="deflist">
+  <div class="d-row"><div class="d-k">Gestión de tareas</div><div class="d-v">Notion (tablero + GANTT).</div></div>
+  <div class="d-row"><div class="d-k">Documentación</div><div class="d-v">Google Drive / Docs + este documento; código y README en GitHub.</div></div>
+  <div class="d-row"><div class="d-k">Comunicación</div><div class="d-v">Grupo de mensajería del equipo + reuniones de validación con el cliente.</div></div>
+  <div class="d-row"><div class="d-k">Repositorio</div><div class="d-v">GitHub (todos los integrantes como contributors; equipo docente como colaborador si es privado).</div></div>
+  <div class="d-row"><div class="d-k">Diseño</div><div class="d-v">Figma (interfaz) y Tinkercad / Fusion 360 (3D del nodo).</div></div>
+</div>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 6. OFERTA ECONÓMICA ══════ -->
+<h2 class="sec" id="s6"><span class="n">6.</span> Oferta Económica</h2>
+<p>Cotización de los servicios e insumos necesarios para el funcionamiento del sistema. Los valores se completan con cotizaciones reales al momento de armar el presupuesto (van en la planilla de estimación, sección 7).</p>
+
+<h3 class="sub" id="s6-1"><span class="n">6.1.</span> Proveedores de conectividad y hosting</h3>
+<p>El estudio ya cuenta con Internet (Claro Fibra 600 MB), por lo que no se cotiza el enlace principal. Lo que sí se cotiza es el <strong>alojamiento del backend</strong> (si se opta por la nube) y el repetidor WiFi.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Ítem</th><th>Opción</th><th>Costo</th></tr></thead>
+<tbody>
+<tr><td>Hosting del backend (24/7)</td><td>Railway / Render / AWS (mensual) o Raspberry Pi local (única vez)</td><td>A cotizar</td></tr>
+<tr><td>Repetidor WiFi / Access Point <span class="tag hw">HW</span></td><td>Mesh o AP para cubrir los ambientes sin señal</td><td>A cotizar</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub" id="s6-2"><span class="n">6.2.</span> Proveedores de insumos electrónicos</h3>
+<p>Placas, sensores y componentes por nodo. Cantidad estimada: 4 nodos (uno por ambiente a monitorear) más repuestos.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Componente</th><th>Cant. (x nodo)</th><th>Costo unit.</th><th>Subtotal</th></tr></thead>
+<tbody>
+<tr><td>Placa ESP32</td><td>1</td><td>A cotizar</td><td>Pendiente</td></tr>
+<tr><td>Sensor DHT22 (temp + humedad)</td><td>1</td><td>A cotizar</td><td>Pendiente</td></tr>
+<tr><td>Sensor MQ-135 (CO₂ / aire)</td><td>1</td><td>A cotizar</td><td>Pendiente</td></tr>
+<tr><td>Sensor BH1750 (luminosidad)</td><td>1</td><td>A cotizar</td><td>Pendiente</td></tr>
+<tr><td>Sensor PIR HC-SR501 (presencia)</td><td>1</td><td>A cotizar</td><td>Pendiente</td></tr>
+<tr><td>Sensor SCT-013 (consumo)</td><td>1</td><td>A cotizar</td><td>Pendiente</td></tr>
+<tr><td>Fuente / cable USB-C + LED + varios</td><td>1</td><td>A cotizar</td><td>Pendiente</td></tr>
+<tr><td>Enchufe inteligente SmartThings <span class="tag hw">HW</span></td><td>por split</td><td>A cotizar</td><td>Pendiente</td></tr>
+</tbody>
+</table>
+</div>
+<div class="box warn"><span class="box-t">Referencia de meta</span>El costo de materiales por nodo adicional debe ser menor a $25.000 (es un KR del Objetivo 4, replicabilidad). Este número sirve de tope al elegir componentes.</div>
+
+<h3 class="sub" id="s6-3"><span class="n">6.3.</span> Proveedores de insumos varios</h3>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Ítem</th><th>Detalle</th><th>Costo</th></tr></thead>
+<tbody>
+<tr><td>Impresión 3D de carcasas</td><td>Filamento + horas de impresión de los nodos (RHW01/RHW04)</td><td>A cotizar</td></tr>
+<tr><td>Montaje</td><td>Doble faz / tornillos, canaletas, prolijidad de instalación</td><td>A cotizar</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 7. ESTIMACIÓN ECONÓMICA ══════ -->
+<h2 class="sec" id="s7"><span class="n">7.</span> Estimación Económica</h2>
+<p>Presupuesto total del proyecto. Suma el costo de insumos (secciones 6.1 a 6.3) más el esfuerzo en horas hombre, diferenciado por categoría profesional y su costo por hora (transparencia en el esfuerzo, según los Lineamientos 2026).</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Rubro</th><th>Detalle</th><th>Monto</th></tr></thead>
+<tbody>
+<tr><td><strong>Insumos electrónicos</strong></td><td>4 nodos completos + enchufes (6.2)</td><td>A completar</td></tr>
+<tr><td><strong>Conectividad / hosting</strong></td><td>Repetidor + hosting backend (6.1)</td><td>A completar</td></tr>
+<tr><td><strong>Insumos varios</strong></td><td>Impresión 3D + montaje (6.3)</td><td>A completar</td></tr>
+<tr><td><strong>Horas hombre</strong></td><td>Desarrollo, diseño e instalación, por categoría y costo/hora</td><td>A completar</td></tr>
+<tr><td><strong>Total estimado</strong></td><td>Suma de los rubros anteriores</td><td>A completar</td></tr>
+</tbody>
+</table>
+</div>
+<div class="deliverable"><span class="d-t">Entregable del equipo</span>Insertar la imagen de la planilla de estimación con el hipervínculo de Google Sheets dentro del texto explicativo, con los montos reales cotizados.</div>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 8. CONTRATO ══════ -->
+<h2 class="sec" id="s8"><span class="n">8.</span> Contrato</h2>
+<p>Documento que explicita el acuerdo entre el equipo desarrollador y el cliente (Valeria Gómez, Estudio Contable Gómez). Se firma en la reunión de validación del prototipo, habiendo leído las limitaciones (4.1).</p>
+
+<div class="deflist">
+  <div class="d-row"><div class="d-k">8.1. Objetivo del proyecto</div><div class="d-v">Desarrollar e instalar SensorOffice, un sistema de monitoreo ambiental que mide temperatura, humedad, CO₂, luminosidad y consumo por ambiente, con alertas y control remoto de los splits, para eliminar la detección tardía de problemas ambientales en el estudio.</div></div>
+  <div class="d-row"><div class="d-k">8.2. Partes involucradas</div><div class="d-v">Equipo desarrollador (integrantes y roles según 2.3) y cliente: Valeria Gómez, socia administradora del Estudio Contable Gómez (Caseros, Tres de Febrero).</div></div>
+  <div class="d-row"><div class="d-k">8.3. Alcance</div><div class="d-v">Se entrega lo definido en 2.2 y 4 (nodos, backend, dashboard, alertas, reporte de consumo, integración SmartThings). Queda fuera lo listado en las Limitaciones (LIM01 a LIM07): apagado automático, ventilación, app nativa, mantenimiento post-entrega e integración contable.</div></div>
+  <div class="d-row"><div class="d-k">8.4. Plazos</div><div class="d-v">Fechas clave del cronograma (5.1): inicio, entregas parciales (validación de prototipo), instalación y entrega final. A completar con las fechas del GANTT.</div></div>
+  <div class="d-row"><div class="d-k">8.5. Responsabilidades</div><div class="d-v">El equipo: desarrollo, instalación, puesta en marcha y documentación. El cliente: dar acceso a las oficinas, validar requerimientos y prototipo, y proveer la cuenta Samsung/SmartThings y el punto de red.</div></div>
+  <div class="d-row"><div class="d-k">8.6. Criterios de aceptación</div><div class="d-v">Se apoyan en los OKRs: 4 nodos operando &gt;72 h sin interrupción, pérdida de lecturas &lt;2%, latencia &lt;5 s, al menos un enchufe operativo (Valeria apaga un split desde el celular en &lt;10 s) y el reporte de consumo por sector generado en el primer mes.</div></div>
+  <div class="d-row"><div class="d-k">8.7. Condiciones de modificación</div><div class="d-v">Todo cambio de alcance solicitado durante el desarrollo se registra en el control de cambios (sección 1) y se evalúa su impacto en el GANTT y en la oferta económica antes de aceptarse. Si una limitación no resulta aceptable, se convierte en un requerimiento nuevo.</div></div>
+  <div class="d-row"><div class="d-k">8.8. Firmas</div><div class="d-v">Firma del equipo desarrollador y de Valeria Gómez (simbólica, en la validación del prototipo).</div></div>
+</div>
+
+<footer>
+  <div class="footer-accent"><i></i><i></i></div>
+  <div class="footer-inner">
+    <p class="footer-txt"><strong>SensorOffice</strong> · Documentación del Proyecto · Caso Valeria Gómez, Estudio Contable Gómez (Caseros).<br>
+    Evaluación de Proyectos · 7mo Informática 2026 · Instituto Leonardo Murialdo.<br>
+    Prof. Pedaci, Lourdes</p>
+    <a class="btn-linkedin" href="https://www.linkedin.com/in/lourdes-pedaci" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+      <span>LinkedIn</span>
+    </a>
+  </div>
+</footer>
+
+</main>
+</div>
+
+<script>
+// TOC activo según scroll
+const links=[...document.querySelectorAll('.toc a')];
+const map=links.map(a=>({a,el:document.querySelector(a.getAttribute('href'))})).filter(o=>o.el);
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    links.forEach(a=>a.classList.remove('act'));
+    const hit=map.find(o=>o.el===e.target);
+    if(hit)hit.a.classList.add('act');
+  }});
+},{rootMargin:'-10% 0px -80% 0px',threshold:0});
+map.forEach(o=>obs.observe(o.el));
+</script>
+</body>
+</html>
