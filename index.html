@@ -81,6 +81,12 @@ aside::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
 .toc a.lvl2{padding-left:20px;font-size:11.5px;}
 .toc a.lvl3{padding-left:32px;font-size:11px;color:var(--ink3);}
 .toc a.act{background:var(--bg2);color:var(--accent);font-weight:600;border-left-color:var(--accent);}
+/* VOLVER AL HUB */
+.back-hub{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-size:11.5px;font-weight:600;color:var(--ink2);text-decoration:none;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 11px;margin-bottom:1.35rem;line-height:1.4;transition:background .14s,color .14s,transform .14s;}
+.back-hub:hover{background:var(--bg3);color:var(--accent);transform:translateX(-2px);}
+.back-hub:active{transform:translateX(0);}
+.back-hub .arr{font-family:var(--mono);color:var(--ink3);font-weight:400;}
+.back-hub:hover .arr{color:var(--accent);}
 .toc .toc-group{margin-top:1.1rem;margin-bottom:.25rem;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:0 9px;font-family:var(--sans);}
 
 /* MAIN */
@@ -235,38 +241,46 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 
 <!-- ═══════════ TOC ═══════════ -->
 <aside>
+  <a class="back-hub" href="https://lpedaci.github.io/ev_proy-landing-casos/"><span class="arr" aria-hidden="true">←</span> Volver al hub</a>
   <div class="toc-brand">Documentación del <span>Proyecto</span></div>
   <div class="toc-sub">SensorOffice · 7mo Informática 2026</div>
   <nav class="toc">
     <div class="toc-group">Primera sección</div>
     <a href="#s1">1 · Control de Cambios</a>
-    <a href="#s2">2 · Introducción</a>
-    <a href="#s2-1" class="lvl2">2.1 Propósito</a>
-    <a href="#s2-2" class="lvl2">2.2 Alcance</a>
-    <a href="#s2-3" class="lvl2">2.3 Personal Involucrado</a>
-    <a href="#s2-4" class="lvl2">2.4 Definiciones y acrónimos</a>
-    <a href="#s2-5" class="lvl2">2.5 Referencias</a>
-    <a href="#s2-6" class="lvl2">2.6 Resumen Ejecutivo</a>
+    <a href="#s2">2 · Diagnóstico: Árbol de Problemas</a>
+    <a href="#s3">3 · Introducción</a>
+    <a href="#s3-1" class="lvl2">3.1 Propósito</a>
+    <a href="#s3-2" class="lvl2">3.2 Alcance</a>
+    <a href="#s3-3" class="lvl2">3.3 Personal Involucrado</a>
+    <a href="#s3-4" class="lvl2">3.4 Definiciones y acrónimos</a>
+    <a href="#s3-5" class="lvl2">3.5 Referencias</a>
+    <a href="#s3-6" class="lvl2">3.6 Resumen Ejecutivo</a>
     <div class="toc-group">Segunda sección</div>
-    <a href="#s3">3 · Descripción General</a>
-    <a href="#s3-1" class="lvl2">3.1 Perspectiva</a>
-    <a href="#s3-2" class="lvl2">3.2 Funcionalidad</a>
-    <a href="#s3-3" class="lvl2">3.3 Usuarios</a>
-    <a href="#s3-4" class="lvl2">3.4 Restricciones</a>
-    <a href="#s3-5" class="lvl2">3.5 Suposiciones</a>
-    <a href="#s3-6" class="lvl2">3.6 Evolución previsible</a>
+    <a href="#s4">4 · Descripción General</a>
+    <a href="#s4-1" class="lvl2">4.1 Perspectiva</a>
+    <a href="#s4-2" class="lvl2">4.2 Funcionalidad</a>
+    <a href="#s4-3" class="lvl2">4.3 Usuarios</a>
+    <a href="#s4-4" class="lvl2">4.4 Restricciones</a>
+    <a href="#s4-5" class="lvl2">4.5 Suposiciones</a>
+    <a href="#s4-6" class="lvl2">4.6 Evolución previsible</a>
     <div class="toc-group">Tercera sección</div>
-    <a href="#s4">4 · Requisitos Específicos</a>
-    <a href="#s4-1" class="lvl2">4.1 Funcionales</a>
-    <a href="#s4-2" class="lvl2">4.2 Interfaz de usuario</a>
-    <a href="#s4-3" class="lvl2">4.3 Interfaz de hardware</a>
-    <a href="#s4-4" class="lvl2">4.4 Interfaz de software</a>
-    <a href="#s4-5" class="lvl2">4.5 Comunicación</a>
-    <a href="#s4-6" class="lvl2">4.6 Modelo Entidad-Relación</a>
-    <a href="#s5">5 · Oferta de Gestión</a>
-    <a href="#s6">6 · Oferta Económica</a>
-    <a href="#s7">7 · Estimación Económica</a>
-    <a href="#s8">8 · Contrato</a>
+    <a href="#s5">5 · Requisitos Específicos</a>
+    <a href="#s5-1" class="lvl2">5.1 Funcionales</a>
+    <a href="#s5-2" class="lvl2">5.2 Interfaz de usuario</a>
+    <a href="#s5-3" class="lvl2">5.3 Interfaz de hardware</a>
+    <a href="#s5-4" class="lvl2">5.4 Interfaz de software</a>
+    <a href="#s5-5" class="lvl2">5.5 Comunicación</a>
+    <a href="#s5-6" class="lvl2">5.6 Modelo Entidad-Relación</a>
+    <a href="#s6">6 · Oferta de Gestión</a>
+    <a href="#s7">7 · Oferta Económica</a>
+    <a href="#s8">8 · Estimación Económica</a>
+    <a href="#s9">9 · Contrato</a>
+    <div class="toc-group">Seguimiento</div>
+    <a href="#s10">10 · Bitácora del Proyecto</a>
+    <a href="#s10-1" class="lvl2">10.1 Registro de Entrevistas</a>
+    <a href="#s10-2" class="lvl2">10.2 Minutas de Reunión</a>
+    <a href="#s10-3" class="lvl2">10.3 Cambios del Mockup</a>
+    <a href="#s10-4" class="lvl2">10.4 Avances Técnicos</a>
   </nav>
 </aside>
 
@@ -306,18 +320,115 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </div>
 <div class="box todo"><span class="box-t">A completar por el equipo</span>Las fechas y las versiones definitivas se cargan a medida que el proyecto avanza. Mantener una fila por cada cambio de alcance validado con el cliente.</div>
 
-<!-- ══════ 2. INTRODUCCIÓN ══════ -->
-<h2 class="sec" id="s2"><span class="n">2.</span> Introducción</h2>
+<div class="sec-rule"></div>
 
-<h3 class="sub" id="s2-1"><span class="n">2.1.</span> Propósito</h3>
+<!-- ══════ 2. DIAGNÓSTICO ══════ -->
+<h2 class="sec" id="s2"><span class="n">2.</span> Diagnóstico: Árbol de Problemas y Soluciones</h2>
+<p>Diagnóstico original elaborado por el equipo a partir del relevamiento de campo en el Estudio Contable Gómez. Es la pieza que fundamenta todas las decisiones de diseño que siguen: el problema central y sus causas explican por qué el sistema mide lo que mide, y los medios del árbol de soluciones son el origen directo de los requerimientos funcionales y de hardware que se especifican más adelante.</p>
+
+<div class="box info">
+  <span class="box-t">Cómo se lee el árbol</span>
+  <p>El árbol de problemas se lee de abajo hacia arriba: las causas producen el problema central, y el problema central produce los efectos. El árbol de soluciones es su espejo (cada causa se convierte en un medio, y cada efecto en un fin medible).</p>
+</div>
+
+<div class="flow">
+  <span class="node">Causas</span><span class="arr">→ producen →</span>
+  <span class="node">Problema central</span><span class="arr">→ produce →</span>
+  <span class="node">Efectos</span>
+</div>
+
+<h4 class="subsub">Problema central</h4>
+<div class="box info">
+  <span class="box-t">Problema central</span>
+  <p>El Estudio Contable Gómez <strong>no tiene forma objetiva ni en tiempo real de conocer el estado ambiental de sus oficinas</strong>. El control es 100% manual y reactivo: el estudio se entera de que un ambiente está mal cuando alguien se queja.</p>
+</div>
+
+<h4 class="subsub">Causas</h4>
+<p>Condiciones que producen el problema central. Cada una se relevó en las entrevistas y se traduce después en un requerimiento concreto.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Causa</th><th>Qué se observó en el relevamiento</th></tr></thead>
+<tbody>
+<tr><td><strong>No se mide ninguna variable ambiental</strong></td><td>Nadie mide temperatura, humedad, CO₂ ni luminosidad. El diagnóstico del ambiente depende de la sensación de cada persona.</td></tr>
+<tr><td><strong>La climatización se maneja a criterio de cada persona</strong></td><td>Cada uno regula su split como quiere y quedan equipos encendidos en ambientes sin ocupación.</td></tr>
+<tr><td><strong>La oficina del fondo no tiene medición de CO₂ ni ventilación</strong></td><td>Es el ambiente más cerrado del estudio y no existe ningún dato que respalde ni descarte la sensación de aire viciado.</td></tr>
+<tr><td><strong>La red WiFi no cubre todos los ambientes</strong> <span class="tag hw">HW</span></td><td>La señal del router alcanza la oficina central, pero no llega a los demás ambientes.</td></tr>
+<tr><td><strong>Los splits son viejos y sin conectividad propia</strong> <span class="tag hw">HW</span></td><td>No admiten control remoto ni programación: solo se operan con el control físico, estando en el lugar.</td></tr>
+<tr><td><strong>No hay registro histórico ni trazabilidad</strong></td><td>No existe ninguna serie de datos previa, así que no se puede comparar un día con otro ni un ambiente con otro.</td></tr>
+<tr><td><strong>No hay alertas</strong></td><td>Ningún mecanismo avisa cuando una condición se sale de rango. El aviso lo da una persona incómoda.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 class="subsub">Efectos</h4>
+<p>Consecuencias que el problema central produce hoy en el estudio. Sus valores actuales son los que forman la línea de base contra la que después se mide el proyecto.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Efecto</th><th>Cómo se manifiesta hoy (línea de base)</th></tr></thead>
+<tbody>
+<tr><td><strong>Incomodidad detectada tarde</strong></td><td>3 a 4 quejas de temperatura por semana, siempre después de que el ambiente ya está incómodo.</td></tr>
+<tr><td><strong>Gasto eléctrico evitable</strong></td><td>Splits encendidos en ambientes sin gente. La factura subió y no se puede explicar con datos.</td></tr>
+<tr><td><strong>Aire viciado en la oficina del fondo</strong></td><td>"Siempre huele a cerrado", sin ningún valor que confirme el problema ni que muestre cuándo mejora.</td></tr>
+<tr><td><strong>Imposible cuantificar o comparar el ahorro</strong></td><td>Sin consumo medido por sector, no hay forma de comparar la situación antes y después de una medida.</td></tr>
+<tr><td><strong>Decisiones sin datos</strong></td><td>La climatización y las compras de equipamiento se deciden por percepción y no por evidencia.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4 class="subsub">Árbol de soluciones</h4>
+<div class="box info">
+  <span class="box-t">Objetivo central</span>
+  <p>Dar al Estudio Contable Gómez una <strong>lectura ambiental objetiva y en tiempo real</strong> de cada oficina, que permita detectar, explicar y corregir los problemas de confort y de consumo con datos y no con percepciones.</p>
+</div>
+
+<p>Cada <strong>medio</strong> del árbol de soluciones neutraliza una causa identificada más arriba, y se convierte después en uno o varios requerimientos del sistema.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Medio</th><th>Causa que neutraliza</th></tr></thead>
+<tbody>
+<tr><td><strong>Red de nodos ESP32 en cada ambiente</strong><div class="origin">Miden temperatura, humedad, CO₂, luminosidad, presencia y consumo eléctrico de forma continua.</div></td><td>No se mide ninguna variable ambiental.</td></tr>
+<tr><td><strong>Backend con base de datos histórica</strong><div class="origin">Guarda cada lectura con fecha, hora y sector de origen.</div></td><td>No hay registro histórico ni trazabilidad.</td></tr>
+<tr><td><strong>Dashboard en tiempo real</strong><div class="origin">Estado de todos los ambientes en una pantalla única, accesible desde PC y celular.</div></td><td>El control es 100% manual y reactivo.</td></tr>
+<tr><td><strong>Alertas por umbral</strong><div class="origin">Aviso automático apenas una variable se sale del rango configurado.</div></td><td>No hay alertas.</td></tr>
+<tr><td><strong>Apagado remoto vía SmartThings</strong> <span class="tag hw">HW</span><div class="origin">Enchufe inteligente entre el tomacorriente y el split, operado desde el celular.</div></td><td>Splits viejos sin conectividad propia y climatización a criterio de cada persona.</td></tr>
+<tr><td><strong>Reporte mensual de consumo por sector</strong><div class="origin">Consulta agregada sobre las lecturas de consumo, por ambiente y por mes.</div></td><td>Imposible cuantificar o comparar el ahorro.</td></tr>
+<tr><td><strong>Repetidor WiFi</strong> <span class="tag hw">HW</span><div class="origin">Prerequisito de infraestructura: sin cobertura no hay nodos que reporten.</div></td><td>La red WiFi no cubre todos los ambientes.</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Los <strong>fines</strong> son el espejo de los efectos: expresan a qué valor debería llegar cada uno con el sistema funcionando.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Fin</th><th>Meta verificable</th><th>Punto de partida</th></tr></thead>
+<tbody>
+<tr><td><strong>Bajar las quejas por incomodidad ambiental</strong></td><td>Máximo 1 queja por semana.</td><td>3 a 4 por semana</td></tr>
+<tr><td><strong>Detectar los problemas ambientales a tiempo</strong></td><td>Menos de 5 minutos entre la anomalía y el aviso.</td><td>Horas, cuando alguien avisa</td></tr>
+<tr><td><strong>Hacer visible el consumo por sector</strong></td><td>Reporte mensual de consumo por sector, generado desde el primer mes.</td><td>No existe</td></tr>
+<tr><td><strong>Cuantificar el ahorro</strong></td><td>Comparación del consumo medido contra la línea de base relevada antes de instalar.</td><td>No medible</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="box info">
+  <span class="box-t">Del árbol al resto del documento</span>
+  <p>Este diagnóstico es el que alimenta la <strong>línea de base</strong> y los <strong>OKRs</strong> definidos en los Lineamientos 2026: los efectos aportan los valores de partida (3 a 4 quejas semanales, detección en horas, consumo no medido) y los fines aportan los Key Results contra los que se evalúa el proyecto. Lo que el árbol identifica pero el sistema no resuelve en esta entrega queda declarado en las Limitaciones del alcance (5.1), y las mejoras que se difieren a versiones posteriores, en la Evolución previsible del sistema (4.6).</p>
+</div>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 3. INTRODUCCIÓN ══════ -->
+<h2 class="sec" id="s3"><span class="n">3.</span> Introducción</h2>
+
+<h3 class="sub" id="s3-1"><span class="n">3.1.</span> Propósito</h3>
 <p>El propósito del proyecto es dotar al Estudio Contable Gómez de una forma <strong>objetiva y en tiempo real</strong> de conocer el estado ambiental de sus oficinas, para dejar de depender de que un empleado se queje para enterarse de que un ambiente está incómodo. Hoy el control es 100% manual y visual: nadie mide temperatura, humedad ni calidad del aire, y los equipos de climatización se manejan a criterio de cada persona.</p>
 <p>SensorOffice busca resolver tres problemas medibles: la <strong>detección tardía</strong> de la incomodidad ambiental, el <strong>gasto eléctrico</strong> de los splits que quedan encendidos sin ocupación, y la <strong>falta de ventilación</strong> de la oficina del fondo (que "siempre huele a cerrado" porque nadie mide el CO₂).</p>
 
-<h3 class="sub" id="s2-2"><span class="n">2.2.</span> Alcance</h3>
+<h3 class="sub" id="s3-2"><span class="n">3.2.</span> Alcance</h3>
 <p>El sistema <strong>incluye</strong>: una red de nodos de sensores (ESP32) instalados en cada ambiente, un backend que recibe y almacena las lecturas, un dashboard web (PC y celular) que muestra el estado en tiempo real y el historial, un sistema de alertas por umbral, un reporte mensual de consumo por sector, y la integración con Samsung SmartThings para apagar los splits de forma remota.</p>
-<p>El sistema <strong>no incluye</strong> el apagado automático de los splits sin intervención humana, el control de actuadores de ventilación, ni la integración con el software contable del estudio. El detalle completo del límite del alcance está en el apartado de Limitaciones (dentro de 4.1) y se formaliza en el Contrato (sección 8).</p>
+<p>El sistema <strong>no incluye</strong> el apagado automático de los splits sin intervención humana, el control de actuadores de ventilación, ni la integración con el software contable del estudio. El detalle completo del límite del alcance está en el apartado de Limitaciones (dentro de 5.1) y se formaliza en el Contrato (sección 9).</p>
 
-<h3 class="sub" id="s2-3"><span class="n">2.3.</span> Personal Involucrado</h3>
+<h3 class="sub" id="s3-3"><span class="n">3.3.</span> Personal Involucrado</h3>
 <p>Roles del equipo de proyecto (según los Lineamientos 2026: PM, desarrollo Frontend/Backend, UX/UI, microcontrolador, base de datos e infraestructura de red). En proyectos de hardware se suma el rol de <strong>Técnico instalador</strong>.</p>
 <div class="tbl-wrap">
 <table>
@@ -334,7 +445,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </table>
 </div>
 
-<h3 class="sub" id="s2-4"><span class="n">2.4.</span> Definiciones, acrónimos y abreviaturas</h3>
+<h3 class="sub" id="s3-4"><span class="n">3.4.</span> Definiciones, acrónimos y abreviaturas</h3>
 <div class="tbl-wrap">
 <table>
 <thead><tr><th>Término</th><th>Definición</th></tr></thead>
@@ -355,7 +466,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </table>
 </div>
 
-<h3 class="sub" id="s2-5"><span class="n">2.5.</span> Referencias</h3>
+<h3 class="sub" id="s3-5"><span class="n">3.5.</span> Referencias</h3>
 <p>Formato APA 7ª edición.</p>
 <ul>
 <li>Pedaci, L. (2026). <em>Evaluación de Proyectos - Módulo 01: El Proyecto y sus generalidades</em>. Instituto Leonardo Murialdo.</li>
@@ -366,16 +477,16 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 <li>Project Management Institute. (s.f.). <em>PMBOK - Fases del proyecto</em>.</li>
 </ul>
 
-<h3 class="sub" id="s2-6"><span class="n">2.6.</span> Resumen Ejecutivo</h3>
+<h3 class="sub" id="s3-6"><span class="n">3.6.</span> Resumen Ejecutivo</h3>
 <p>SensorOffice es un sistema de monitoreo ambiental de hardware y software pensado para el Estudio Contable Gómez (Caseros, Tres de Febrero): tres oficinas, ~180 m², 8 empleados y 2 socios. El sistema instala nodos de sensores en cada ambiente que miden temperatura, humedad, CO₂, luminosidad, presencia y consumo eléctrico, y los envía a un dashboard web donde Valeria y los empleados ven el estado en tiempo real, reciben alertas cuando una variable se sale de rango y pueden apagar los splits de forma remota.</p>
 <p><strong>Público objetivo:</strong> pymes de oficina de superficie chica-media que necesitan controlar confort y consumo sin instalar equipos de climatización nuevos. <strong>Resultados esperados:</strong> bajar las quejas de temperatura de 3-4 por semana a un máximo de 1, detectar problemas ambientales en menos de 5 minutos (contra "horas, cuando alguien avisa") y generar por primera vez un reporte mensual de consumo por sector que permita cuantificar el ahorro.</p>
 
 <div class="sec-rule"></div>
 
-<!-- ══════ 3. DESCRIPCIÓN GENERAL ══════ -->
-<h2 class="sec" id="s3"><span class="n">3.</span> Descripción General</h2>
+<!-- ══════ 4. DESCRIPCIÓN GENERAL ══════ -->
+<h2 class="sec" id="s4"><span class="n">4.</span> Descripción General</h2>
 
-<h3 class="sub" id="s3-1"><span class="n">3.1.</span> Perspectiva del producto</h3>
+<h3 class="sub" id="s4-1"><span class="n">4.1.</span> Perspectiva del producto</h3>
 <p>SensorOffice es un <strong>sistema nuevo</strong>: hoy el estudio no tiene ningún sistema de monitoreo, el control es 100% manual. No reemplaza ni mejora un software existente, y tampoco es una parte de un sistema mayor. Sí se apoya en infraestructura que el estudio ya tiene (conexión Claro Fibra 600 MB, PC de escritorio y celular Samsung con la app SmartThings instalada) y en los splits actuales, que se integran mediante enchufes inteligentes en lugar de reemplazarse.</p>
 <p>Arquitectura en tres capas (hardware de captura, backend de procesamiento y frontend de visualización):</p>
 <div class="flow">
@@ -384,8 +495,8 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
   <span class="node">Dashboard React (PC + celular)</span>
 </div>
 
-<h3 class="sub" id="s3-2"><span class="n">3.2.</span> Funcionalidad del producto</h3>
-<p>A nivel general (sin entrar todavía en los requisitos funcionales del apartado 4.1), el producto permite:</p>
+<h3 class="sub" id="s4-2"><span class="n">4.2.</span> Funcionalidad del producto</h3>
+<p>A nivel general (sin entrar todavía en los requisitos funcionales del apartado 5.1), el producto permite:</p>
 <ul>
 <li>Medir de forma continua las condiciones ambientales de cada oficina (temperatura, humedad, CO₂, luminosidad, presencia) y el consumo eléctrico por circuito.</li>
 <li>Mostrar el estado actual de cada ambiente en una pantalla única, en lenguaje claro y sin jerga técnica.</li>
@@ -395,7 +506,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 <li>Generar un reporte mensual de consumo por sector.</li>
 </ul>
 
-<h3 class="sub" id="s3-3"><span class="n">3.3.</span> Características de los Usuarios <span class="bookref">Buenas Prácticas UTN p.56/57</span></h3>
+<h3 class="sub" id="s4-3"><span class="n">4.3.</span> Características de los Usuarios <span class="bookref">Buenas Prácticas UTN p.56/57</span></h3>
 <p>Siguiendo el formato de la tabla de usuarios del libro UTN (tipo de usuario, formación y actividades). El sistema define dos perfiles con acceso a la interfaz (administradora y empleado) y un tercer perfil operativo propio de los proyectos con hardware (técnico instalador).</p>
 
 <div class="user-tbl admin">
@@ -416,36 +527,36 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
   <div class="row"><div class="k">Actividades</div><div class="v">Instala los nodos y los enchufes, y configura el nombre y la clave de la red WiFi y el nombre del ambiente desde un portal web de setup (red local), sin reprogramar el ESP32. La instalación de un nodo nuevo no debe superar los 20 minutos.</div></div>
 </div>
 
-<h3 class="sub" id="s3-4"><span class="n">3.4.</span> Restricciones <span class="bookref">Buenas Prácticas UTN p.57</span></h3>
+<h3 class="sub" id="s4-4"><span class="n">4.4.</span> Restricciones <span class="bookref">Buenas Prácticas UTN p.57</span></h3>
 
-<h4 class="subsub" id="s3-4-1"><span class="n">3.4.1.</span> Políticas reguladoras</h4>
-<p>El sistema se desarrolla con software libre y de código abierto (Node.js, PostgreSQL, Mosquitto, React, framework Arduino). No hay costo de licencia de software. La única política de pago externa posible es el alojamiento del backend en la nube (ver 3.4.2). El repositorio se publica en GitHub; si se publica como privado, se incluye al equipo docente como colaborador.</p>
+<h4 class="subsub" id="s4-4-1"><span class="n">4.4.1.</span> Políticas reguladoras</h4>
+<p>El sistema se desarrolla con software libre y de código abierto (Node.js, PostgreSQL, Mosquitto, React, framework Arduino). No hay costo de licencia de software. La única política de pago externa posible es el alojamiento del backend en la nube (ver 4.4.2). El repositorio se publica en GitHub; si se publica como privado, se incluye al equipo docente como colaborador.</p>
 
-<h4 class="subsub" id="s3-4-2"><span class="n">3.4.2.</span> Limitaciones de hardware</h4>
+<h4 class="subsub" id="s4-4-2"><span class="n">4.4.2.</span> Limitaciones de hardware</h4>
 <p>El backend necesita estar disponible 24/7 para no perder lecturas. El estudio no cuenta con un servidor propio siempre encendido, por lo que se resuelve con un servicio cloud (por ejemplo Railway, Render o AWS) o una Raspberry Pi local. Los nodos se alimentan por cable USB desde tomacorriente (hay toma en todos los ambientes), no por batería. El sensor MQ-135 (CO₂/gases) es de bajo costo y da valores orientativos, no de precisión de laboratorio.</p>
 
-<h4 class="subsub" id="s3-4-3"><span class="n">3.4.3.</span> Interfaces con otras aplicaciones</h4>
+<h4 class="subsub" id="s4-4-3"><span class="n">4.4.3.</span> Interfaces con otras aplicaciones</h4>
 <p>El sistema se integra con la <strong>API de Samsung SmartThings</strong> para enviar comandos de encendido/apagado a los enchufes inteligentes de los splits. No se integra con ningún software contable, ERP ni sistema interno del estudio (queda fuera del alcance).</p>
 
-<h4 class="subsub" id="s3-4-4"><span class="n">3.4.4.</span> Función de control</h4>
+<h4 class="subsub" id="s4-4-4"><span class="n">4.4.4.</span> Función de control</h4>
 <p>Autenticación con usuario y contraseña, y control de acceso por rol. La administradora (Valeria) tiene acceso total; los empleados tienen acceso de solo lectura y no pueden modificar umbrales ni configuración. Toda operación que modifica el estado del sistema (cambio de umbral, comando a un enchufe) queda registrada con usuario, fecha y hora (trazabilidad).</p>
 
-<h4 class="subsub" id="s3-4-5"><span class="n">3.4.5.</span> Requisitos del lenguaje</h4>
+<h4 class="subsub" id="s4-4-5"><span class="n">4.4.5.</span> Requisitos del lenguaje</h4>
 <p>Toda la interfaz y el manual de uso están en <strong>español</strong>. El estado del ambiente se comunica en lenguaje natural ("Temperatura OK", "CO₂ elevado, ventile la sala") y no como valores crudos sin contexto, dada la comodidad tecnológica media de la usuaria administradora.</p>
 
-<h4 class="subsub" id="s3-4-6"><span class="n">3.4.6.</span> Protocolos señalados</h4>
+<h4 class="subsub" id="s4-4-6"><span class="n">4.4.6.</span> Protocolos señalados</h4>
 <p>Comunicación nodo → servidor por <strong>MQTT</strong> (estándar IoT de bajo consumo). Comunicación servidor → dashboard por <strong>HTTP/REST</strong>. Integración con SmartThings por HTTPS con autenticación <strong>OAuth 2.0</strong>.</p>
 
-<h4 class="subsub" id="s3-4-7"><span class="n">3.4.7.</span> Requisitos de fiabilidad</h4>
+<h4 class="subsub" id="s4-4-7"><span class="n">4.4.7.</span> Requisitos de fiabilidad</h4>
 <p>Cada nodo debe reconectarse solo a la red WiFi si pierde señal (reintento cada 30 segundos, sin reiniciar ni perder lecturas). La pérdida de lecturas por problemas de red debe ser menor al 2% del total de muestras esperadas, gracias al repetidor WiFi. Cada lectura se almacena con fecha, hora y sector de origen. Los nodos deben operar sin interrupciones por más de 72 horas consecutivas en la prueba de campo.</p>
 
-<h4 class="subsub" id="s3-4-8"><span class="n">3.4.8.</span> Credibilidad de la aplicación</h4>
+<h4 class="subsub" id="s4-4-8"><span class="n">4.4.8.</span> Credibilidad de la aplicación</h4>
 <p>La confianza del usuario se sostiene sobre dos pilares: la <strong>latencia baja</strong> (menos de 5 segundos entre lectura y visualización, para que la alerta en tiempo real tenga sentido) y un <strong>indicador físico de estado</strong> en cada nodo (LED verde: OK / rojo: error) que permite ver si el sistema funciona sin abrir el dashboard.</p>
 
-<h4 class="subsub" id="s3-4-9"><span class="n">3.4.9.</span> Consideraciones de seguridad</h4>
+<h4 class="subsub" id="s4-4-9"><span class="n">4.4.9.</span> Consideraciones de seguridad</h4>
 <p>Contraseñas almacenadas con hash (no en texto plano), sesiones con token (JWT), acceso restringido por rol, y el broker MQTT protegido (usuario/contraseña, y TLS en el puerto 8883 si el backend se aloja en la nube). Los datos ambientales no son sensibles a nivel personal, pero el acceso a la configuración y al control de los splits sí se restringe a la administradora.</p>
 
-<h3 class="sub" id="s3-5"><span class="n">3.5.</span> Suposiciones y dependencias</h3>
+<h3 class="sub" id="s4-5"><span class="n">4.5.</span> Suposiciones y dependencias</h3>
 <ul>
 <li>Se asume que la conexión a Internet del estudio (Claro Fibra 600 MB) se mantiene estable; el router está en la oficina central.</li>
 <li>El proyecto <strong>depende</strong> de instalar un repetidor WiFi antes de desplegar los nodos, porque la red actual solo cubre la oficina central (RHW06).</li>
@@ -454,8 +565,8 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 <li>Se asume que Valeria está dispuesta a pagar si el ahorro se justifica (a confirmar el rango en entrevista).</li>
 </ul>
 
-<h3 class="sub" id="s3-6"><span class="n">3.6.</span> Evolución previsible del sistema</h3>
-<p>Mejoras identificadas para versiones futuras (surgen de las Limitaciones del apartado 4.1):</p>
+<h3 class="sub" id="s4-6"><span class="n">4.6.</span> Evolución previsible del sistema</h3>
+<p>Mejoras identificadas para versiones futuras (surgen de las Limitaciones del apartado 5.1):</p>
 <ul>
 <li><strong>v2 - Apagado automático</strong> de splits con confirmación configurable y período de gracia, una vez validado el PIR en campo.</li>
 <li><strong>v2 - Sensor de CO₂ de mayor precisión</strong> (SCD40, NDIR) si el usuario requiere medición certificada.</li>
@@ -466,10 +577,10 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 
 <div class="sec-rule"></div>
 
-<!-- ══════ 4. REQUISITOS ESPECÍFICOS ══════ -->
-<h2 class="sec" id="s4"><span class="n">4.</span> Requisitos Específicos</h2>
+<!-- ══════ 5. REQUISITOS ESPECÍFICOS ══════ -->
+<h2 class="sec" id="s5"><span class="n">5.</span> Requisitos Específicos</h2>
 
-<h3 class="sub" id="s4-1"><span class="n">4.1.</span> Requerimientos funcionales <span class="bookref">Buenas Prácticas UTN p.59/60</span></h3>
+<h3 class="sub" id="s5-1"><span class="n">5.1.</span> Requerimientos funcionales <span class="bookref">Buenas Prácticas UTN p.59/60</span></h3>
 <p>Acciones concretas que el sistema debe poder realizar. Cada requerimiento indica su prioridad y el origen (síntoma o bloque de la entrevista del que surge). Los que dependen de hardware se marcan con <span class="tag hw">HW</span>.</p>
 <div class="tbl-wrap">
 <table>
@@ -504,7 +615,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </div>
 
 <h4 class="subsub">Limitaciones del alcance</h4>
-<p>Definen qué <strong>no</strong> hace el sistema en esta entrega. No son debilidades: son un contrato de honestidad con el usuario. Cada limitación puede convertirse en una versión futura (ver 3.6). Esta tabla se muestra y se discute explícitamente en la validación del prototipo, antes de la firma del contrato.</p>
+<p>Definen qué <strong>no</strong> hace el sistema en esta entrega. No son debilidades: son un contrato de honestidad con el usuario. Cada limitación puede convertirse en una versión futura (ver 4.6). Esta tabla se muestra y se discute explícitamente en la validación del prototipo, antes de la firma del contrato.</p>
 <div class="tbl-wrap">
 <table>
 <thead><tr><th>ID</th><th>Qué NO hace en esta entrega</th><th>Por qué</th><th>¿Versión futura?</th></tr></thead>
@@ -520,14 +631,14 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </table>
 </div>
 
-<h3 class="sub" id="s4-2"><span class="n">4.2.</span> Interfaces de usuario <span class="bookref">Buenas Prácticas UTN p.58</span></h3>
+<h3 class="sub" id="s5-2"><span class="n">5.2.</span> Interfaces de usuario <span class="bookref">Buenas Prácticas UTN p.58</span></h3>
 <p>El único punto de contacto de Valeria y los empleados con el sistema es el <strong>dashboard web</strong>, diseñado con criterio de Interacción Humano-Computadora (HCI): la interfaz no se diseña por estética sino por usabilidad, según la formación y la comodidad tecnológica del usuario real (3/5). El estado se comunica en lenguaje natural, con semáforos de color y sin obligar a interpretar valores crudos. Es responsive (misma interfaz en PC y celular, sin instalar nada) y presenta una vista de estado actual, una vista de historial con gráficos, un panel de alertas activas y (solo para la administradora) la configuración de umbrales.</p>
 
-<h4 class="subsub" id="s4-2-1"><span class="n">4.2.1.</span> Diseño de interfaz (Figma)</h4>
+<h4 class="subsub" id="s5-2-1"><span class="n">5.2.1.</span> Diseño de interfaz (Figma)</h4>
 <p>Antes de programar, el equipo diseña el mockup interactivo en Figma y lo valida con Valeria; el feedback se registra como hito en el control de cambios (Lineamientos 2026).</p>
 <div class="deliverable"><span class="d-t">Entregable del equipo</span>Insertar las imágenes del mockup de Figma con el hipervínculo al prototipo dentro del texto explicativo. (Reemplazar este bloque por las capturas + link.)</div>
 
-<h3 class="sub" id="s4-3"><span class="n">4.3.</span> Interfaces de hardware <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
+<h3 class="sub" id="s5-3"><span class="n">5.3.</span> Interfaces de hardware <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
 <p>Requerimientos que condicionan el diseño físico del nodo y de la instalación (marcados <span class="tag hw">HW</span>). Definen forma, alimentación, ubicación y prerequisitos de infraestructura.</p>
 <div class="tbl-wrap">
 <table>
@@ -545,11 +656,11 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </div>
 <div class="box hw"><span class="box-t">Variables medidas y componentes</span>Temperatura y humedad (DHT22, cada 30 s), CO₂/aire (MQ-135, cada 60 s), luminosidad (BH1750, cada 60 s), presencia (PIR HC-SR501) y consumo eléctrico (SCT-013, por circuito). El tipo y la cantidad de sensores se definen después de la entrevista, no antes.</div>
 
-<h4 class="subsub" id="s4-3-1"><span class="n">4.3.1.</span> Visualización 3D del producto</h4>
+<h4 class="subsub" id="s5-3-1"><span class="n">5.3.1.</span> Visualización 3D del producto</h4>
 <p>La carcasa del nodo se modela en 3D (Tinkercad o Fusion 360) antes de fabricarla, respetando RHW01 (dimensiones y prolijidad) y RHW04 (ventilación para el MQ-135).</p>
 <div class="deliverable"><span class="d-t">Entregable del equipo</span>Insertar las imágenes del diseño 3D del nodo con el hipervínculo al modelo dentro del texto explicativo.</div>
 
-<h3 class="sub" id="s4-4"><span class="n">4.4.</span> Interfaces de software <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
+<h3 class="sub" id="s5-4"><span class="n">5.4.</span> Interfaces de software <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
 <p>Componentes de software del sistema y cómo se comunican entre sí. No es lo mismo que los RNF (rendimiento y protocolos) ni que los RF (funcionalidades).</p>
 <div class="tbl-wrap">
 <table>
@@ -558,8 +669,8 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 <tr><td class="rid">ISW01</td><td><strong>Firmware del nodo</strong><div class="origin">Corre en cada ESP32: lee sensores, gestiona la red y publica datos.</div></td><td>C++ / Arduino. Librerías: DHT, PubSubClient (MQTT), ArduinoJSON, WiFiManager.</td><td>Capa de adquisición. Publica en el topic MQTT del ambiente.</td></tr>
 <tr><td class="rid">ISW02</td><td><strong>Broker MQTT</strong><div class="origin">Intermediario entre nodos y backend.</div></td><td>Mosquitto (Eclipse). MQTT 3.1.1, puerto 1883 (u 8883 con TLS).</td><td>Desacopla nodos y backend. Puede alojarse junto al backend.</td></tr>
 <tr><td class="rid">ISW03</td><td><strong>Backend / API REST</strong><div class="origin">Suscribe al broker, persiste lecturas y expone la API.</div></td><td>Node.js + Express. ORM: Prisma o pg. Auth: JWT.</td><td>Lógica de negocio. Evalúa umbrales y dispara alertas.</td></tr>
-<tr><td class="rid">ISW04</td><td><strong>Base de datos</strong><div class="origin">Lecturas con timestamp y sector, umbrales y usuarios.</div></td><td>PostgreSQL. Opcional: TimescaleDB para series temporales.</td><td>Persistencia central. El historial (RF02) y los reportes (RF05) dependen de esta capa. Modelo detallado en 4.6.</td></tr>
-<tr><td class="rid">ISW05</td><td><strong>Dashboard web (Frontend)</strong><div class="origin">Consume la API REST. Tiempo real, historial, alertas y configuración.</div></td><td>React + Vite. Gráficos: Recharts / Chart.js. Estilos: Tailwind. Responsive.</td><td>Capa de presentación. Diseñada en Figma antes de programarse (4.2.1).</td></tr>
+<tr><td class="rid">ISW04</td><td><strong>Base de datos</strong><div class="origin">Lecturas con timestamp y sector, umbrales y usuarios.</div></td><td>PostgreSQL. Opcional: TimescaleDB para series temporales.</td><td>Persistencia central. El historial (RF02) y los reportes (RF05) dependen de esta capa. Modelo detallado en 5.6.</td></tr>
+<tr><td class="rid">ISW05</td><td><strong>Dashboard web (Frontend)</strong><div class="origin">Consume la API REST. Tiempo real, historial, alertas y configuración.</div></td><td>React + Vite. Gráficos: Recharts / Chart.js. Estilos: Tailwind. Responsive.</td><td>Capa de presentación. Diseñada en Figma antes de programarse (5.2.1).</td></tr>
 <tr><td class="rid">ISW06</td><td><strong>Integración Samsung SmartThings</strong><div class="origin">Envía comandos de encendido/apagado a los enchufes.</div></td><td>SmartThings REST API. OAuth 2.0. api.smartthings.com/v1/devices/{id}/commands</td><td>Permite apagar un split ante anomalía, o avisar a Valeria para que lo haga.</td></tr>
 <tr><td class="rid">ISW07</td><td><strong>Servicio de alertas</strong><div class="origin">Evalúa lecturas contra umbrales y notifica al canal del usuario.</div></td><td>Nodemailer (email) y/o OneSignal (push).</td><td>Implementa RF03. Proceso background; no requiere el dashboard abierto.</td></tr>
 </tbody>
@@ -569,7 +680,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
   <span class="node">Sensor</span><span class="arr">→</span><span class="node">ESP32 · ISW01</span><span class="arr">→ MQTT →</span><span class="node">Broker · ISW02</span><span class="arr">→</span><span class="node">Backend · ISW03</span><span class="arr">→</span><span class="node">PostgreSQL · ISW04</span><span class="arr">→ REST →</span><span class="node">Dashboard · ISW05</span>
 </div>
 
-<h3 class="sub" id="s4-5"><span class="n">4.5.</span> Interfaces de comunicación <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
+<h3 class="sub" id="s5-5"><span class="n">5.5.</span> Interfaces de comunicación <span class="bookref">Buenas Prácticas UTN p.59</span></h3>
 <p>Cómo interactúa el sistema con otras aplicaciones, APIs y bases de datos.</p>
 <div class="tbl-wrap">
 <table>
@@ -584,7 +695,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </table>
 </div>
 
-<h3 class="sub" id="s4-6"><span class="n">4.6.</span> Modelo Entidad-Relación de la base de datos</h3>
+<h3 class="sub" id="s5-6"><span class="n">5.6.</span> Modelo Entidad-Relación de la base de datos</h3>
 <p>Modelo de datos relacional que sostiene la persistencia del sistema (componente ISW04). Representa qué guarda el sistema y cómo se relacionan las entidades: los <strong>ambientes</strong> del estudio, los <strong>nodos</strong> físicos instalados en cada uno, los <strong>sensores</strong> que integra cada nodo y las <strong>lecturas</strong> que generan; los <strong>umbrales</strong> que configura la administradora, las <strong>alertas</strong> que se disparan cuando una lectura los supera, y los <strong>enchufes inteligentes</strong> con el registro de <strong>comandos</strong> de encendido/apagado. El color de cada entidad sigue la convención del proyecto: azul para la lógica del sistema, violeta para lo vinculado al hardware y verde para el dato de alto volumen.</p>
 
 <div class="er-fig">
@@ -886,10 +997,10 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 
 <div class="sec-rule"></div>
 
-<!-- ══════ 5. OFERTA DE GESTIÓN ══════ -->
-<h2 class="sec" id="s5"><span class="n">5.</span> Oferta de Gestión</h2>
+<!-- ══════ 6. OFERTA DE GESTIÓN ══════ -->
+<h2 class="sec" id="s6"><span class="n">6.</span> Oferta de Gestión</h2>
 
-<h3 class="sub" id="s5-1"><span class="n">5.1.</span> GANTT</h3>
+<h3 class="sub" id="s6-1"><span class="n">6.1.</span> GANTT</h3>
 <p>Cronograma de tareas, responsables y duración estimada, organizado por las etapas del proyecto (E01 a E06). El GANTT se lleva en Notion / Google Sheets y se actualiza a medida que avanza el proyecto.</p>
 <div class="tbl-wrap">
 <table>
@@ -897,7 +1008,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 <tbody>
 <tr><td class="rid">E01</td><td>Primera entrevista (bloques A-C), identificación del problema real y línea de base.</td><td>Definición del problema, síntomas vs. causas.</td></tr>
 <tr><td class="rid">E02</td><td>Segunda entrevista (bloques D-G), relevamiento del entorno físico e instalación. Factibilidad técnica, económica y de gestión.</td><td>Estudio de factibilidad, requerimientos preliminares.</td></tr>
-<tr><td class="rid">E03</td><td>Diseño del sistema: RF/RNF/RHW/ISW, arquitectura, modelo de datos (4.6).</td><td>Especificación de requerimientos + ER.</td></tr>
+<tr><td class="rid">E03</td><td>Diseño del sistema: RF/RNF/RHW/ISW, arquitectura, modelo de datos (5.6).</td><td>Especificación de requerimientos + ER.</td></tr>
 <tr><td class="rid">E04</td><td>Prototipado: mockup Figma, diseño 3D del nodo, armado del primer nodo y prueba del enchufe SmartThings. Validación con Valeria.</td><td>Mockup validado + nodo prototipo.</td></tr>
 <tr><td class="rid">E05</td><td>Desarrollo: firmware, backend, base de datos, dashboard, alertas e integración SmartThings. Instalación del repetidor y los nodos. Documentación.</td><td>Sistema funcionando + documentación completa.</td></tr>
 <tr><td class="rid">E06</td><td>Presentación profesional, defensa y pitch de negocio.</td><td>Presentación final + landing.</td></tr>
@@ -906,7 +1017,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </div>
 <div class="deliverable"><span class="d-t">Entregable del equipo</span>Insertar la imagen del GANTT con el hipervínculo de Notion / Sheets dentro del texto explicativo, con fechas y responsables reales.</div>
 
-<h3 class="sub" id="s5-2"><span class="n">5.2.</span> Infraestructura administrativa <span class="bookref">Buenas Prácticas UTN p.62</span></h3>
+<h3 class="sub" id="s6-2"><span class="n">6.2.</span> Infraestructura administrativa <span class="bookref">Buenas Prácticas UTN p.62</span></h3>
 <p>Organización interna del equipo y herramientas de trabajo. Siguiendo el esquema del libro UTN, el equipo se organiza en un grupo de dirección/gestión y un grupo de desarrollo, adaptado a la escala del proyecto de 7mo.</p>
 <div class="tbl-wrap">
 <table>
@@ -930,11 +1041,11 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 
 <div class="sec-rule"></div>
 
-<!-- ══════ 6. OFERTA ECONÓMICA ══════ -->
-<h2 class="sec" id="s6"><span class="n">6.</span> Oferta Económica</h2>
-<p>Cotización de los servicios e insumos necesarios para el funcionamiento del sistema. Los valores se completan con cotizaciones reales al momento de armar el presupuesto (van en la planilla de estimación, sección 7).</p>
+<!-- ══════ 7. OFERTA ECONÓMICA ══════ -->
+<h2 class="sec" id="s7"><span class="n">7.</span> Oferta Económica</h2>
+<p>Cotización de los servicios e insumos necesarios para el funcionamiento del sistema. Los valores se completan con cotizaciones reales al momento de armar el presupuesto (van en la planilla de estimación, sección 8).</p>
 
-<h3 class="sub" id="s6-1"><span class="n">6.1.</span> Proveedores de conectividad y hosting</h3>
+<h3 class="sub" id="s7-1"><span class="n">7.1.</span> Proveedores de conectividad y hosting</h3>
 <p>El estudio ya cuenta con Internet (Claro Fibra 600 MB), por lo que no se cotiza el enlace principal. Lo que sí se cotiza es el <strong>alojamiento del backend</strong> (si se opta por la nube) y el repetidor WiFi.</p>
 <div class="tbl-wrap">
 <table>
@@ -946,7 +1057,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </table>
 </div>
 
-<h3 class="sub" id="s6-2"><span class="n">6.2.</span> Proveedores de insumos electrónicos</h3>
+<h3 class="sub" id="s7-2"><span class="n">7.2.</span> Proveedores de insumos electrónicos</h3>
 <p>Placas, sensores y componentes por nodo. Cantidad estimada: 4 nodos (uno por ambiente a monitorear) más repuestos.</p>
 <div class="tbl-wrap">
 <table>
@@ -965,7 +1076,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </div>
 <div class="box warn"><span class="box-t">Referencia de meta</span>El costo de materiales por nodo adicional debe ser menor a $25.000 (es un KR del Objetivo 4, replicabilidad). Este número sirve de tope al elegir componentes.</div>
 
-<h3 class="sub" id="s6-3"><span class="n">6.3.</span> Proveedores de insumos varios</h3>
+<h3 class="sub" id="s7-3"><span class="n">7.3.</span> Proveedores de insumos varios</h3>
 <div class="tbl-wrap">
 <table>
 <thead><tr><th>Ítem</th><th>Detalle</th><th>Costo</th></tr></thead>
@@ -978,16 +1089,16 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 
 <div class="sec-rule"></div>
 
-<!-- ══════ 7. ESTIMACIÓN ECONÓMICA ══════ -->
-<h2 class="sec" id="s7"><span class="n">7.</span> Estimación Económica</h2>
-<p>Presupuesto total del proyecto. Suma el costo de insumos (secciones 6.1 a 6.3) más el esfuerzo en horas hombre, diferenciado por categoría profesional y su costo por hora (transparencia en el esfuerzo, según los Lineamientos 2026).</p>
+<!-- ══════ 8. ESTIMACIÓN ECONÓMICA ══════ -->
+<h2 class="sec" id="s8"><span class="n">8.</span> Estimación Económica</h2>
+<p>Presupuesto total del proyecto. Suma el costo de insumos (secciones 7.1 a 7.3) más el esfuerzo en horas hombre, diferenciado por categoría profesional y su costo por hora (transparencia en el esfuerzo, según los Lineamientos 2026).</p>
 <div class="tbl-wrap">
 <table>
 <thead><tr><th>Rubro</th><th>Detalle</th><th>Monto</th></tr></thead>
 <tbody>
-<tr><td><strong>Insumos electrónicos</strong></td><td>4 nodos completos + enchufes (6.2)</td><td>A completar</td></tr>
-<tr><td><strong>Conectividad / hosting</strong></td><td>Repetidor + hosting backend (6.1)</td><td>A completar</td></tr>
-<tr><td><strong>Insumos varios</strong></td><td>Impresión 3D + montaje (6.3)</td><td>A completar</td></tr>
+<tr><td><strong>Insumos electrónicos</strong></td><td>4 nodos completos + enchufes (7.2)</td><td>A completar</td></tr>
+<tr><td><strong>Conectividad / hosting</strong></td><td>Repetidor + hosting backend (7.1)</td><td>A completar</td></tr>
+<tr><td><strong>Insumos varios</strong></td><td>Impresión 3D + montaje (7.3)</td><td>A completar</td></tr>
 <tr><td><strong>Horas hombre</strong></td><td>Desarrollo, diseño e instalación, por categoría y costo/hora</td><td>A completar</td></tr>
 <tr><td><strong>Total estimado</strong></td><td>Suma de los rubros anteriores</td><td>A completar</td></tr>
 </tbody>
@@ -997,19 +1108,106 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 
 <div class="sec-rule"></div>
 
-<!-- ══════ 8. CONTRATO ══════ -->
-<h2 class="sec" id="s8"><span class="n">8.</span> Contrato</h2>
-<p>Documento que explicita el acuerdo entre el equipo desarrollador y el cliente (Valeria Gómez, Estudio Contable Gómez). Se firma en la reunión de validación del prototipo, habiendo leído las limitaciones (4.1).</p>
+<!-- ══════ 9. CONTRATO ══════ -->
+<h2 class="sec" id="s9"><span class="n">9.</span> Contrato</h2>
+<p>Documento que explicita el acuerdo entre el equipo desarrollador y el cliente (Valeria Gómez, Estudio Contable Gómez). Se firma en la reunión de validación del prototipo, habiendo leído las limitaciones (5.1).</p>
 
 <div class="deflist">
-  <div class="d-row"><div class="d-k">8.1. Objetivo del proyecto</div><div class="d-v">Desarrollar e instalar SensorOffice, un sistema de monitoreo ambiental que mide temperatura, humedad, CO₂, luminosidad y consumo por ambiente, con alertas y control remoto de los splits, para eliminar la detección tardía de problemas ambientales en el estudio.</div></div>
-  <div class="d-row"><div class="d-k">8.2. Partes involucradas</div><div class="d-v">Equipo desarrollador (integrantes y roles según 2.3) y cliente: Valeria Gómez, socia administradora del Estudio Contable Gómez (Caseros, Tres de Febrero).</div></div>
-  <div class="d-row"><div class="d-k">8.3. Alcance</div><div class="d-v">Se entrega lo definido en 2.2 y 4 (nodos, backend, dashboard, alertas, reporte de consumo, integración SmartThings). Queda fuera lo listado en las Limitaciones (LIM01 a LIM07): apagado automático, ventilación, app nativa, mantenimiento post-entrega e integración contable.</div></div>
-  <div class="d-row"><div class="d-k">8.4. Plazos</div><div class="d-v">Fechas clave del cronograma (5.1): inicio, entregas parciales (validación de prototipo), instalación y entrega final. A completar con las fechas del GANTT.</div></div>
-  <div class="d-row"><div class="d-k">8.5. Responsabilidades</div><div class="d-v">El equipo: desarrollo, instalación, puesta en marcha y documentación. El cliente: dar acceso a las oficinas, validar requerimientos y prototipo, y proveer la cuenta Samsung/SmartThings y el punto de red.</div></div>
-  <div class="d-row"><div class="d-k">8.6. Criterios de aceptación</div><div class="d-v">Se apoyan en los OKRs: 4 nodos operando &gt;72 h sin interrupción, pérdida de lecturas &lt;2%, latencia &lt;5 s, al menos un enchufe operativo (Valeria apaga un split desde el celular en &lt;10 s) y el reporte de consumo por sector generado en el primer mes.</div></div>
-  <div class="d-row"><div class="d-k">8.7. Condiciones de modificación</div><div class="d-v">Todo cambio de alcance solicitado durante el desarrollo se registra en el control de cambios (sección 1) y se evalúa su impacto en el GANTT y en la oferta económica antes de aceptarse. Si una limitación no resulta aceptable, se convierte en un requerimiento nuevo.</div></div>
-  <div class="d-row"><div class="d-k">8.8. Firmas</div><div class="d-v">Firma del equipo desarrollador y de Valeria Gómez (simbólica, en la validación del prototipo).</div></div>
+  <div class="d-row"><div class="d-k">9.1. Objetivo del proyecto</div><div class="d-v">Desarrollar e instalar SensorOffice, un sistema de monitoreo ambiental que mide temperatura, humedad, CO₂, luminosidad y consumo por ambiente, con alertas y control remoto de los splits, para eliminar la detección tardía de problemas ambientales en el estudio.</div></div>
+  <div class="d-row"><div class="d-k">9.2. Partes involucradas</div><div class="d-v">Equipo desarrollador (integrantes y roles según 3.3) y cliente: Valeria Gómez, socia administradora del Estudio Contable Gómez (Caseros, Tres de Febrero).</div></div>
+  <div class="d-row"><div class="d-k">9.3. Alcance</div><div class="d-v">Se entrega lo definido en 3.2 y 5 (nodos, backend, dashboard, alertas, reporte de consumo, integración SmartThings). Queda fuera lo listado en las Limitaciones (LIM01 a LIM07): apagado automático, ventilación, app nativa, mantenimiento post-entrega e integración contable.</div></div>
+  <div class="d-row"><div class="d-k">9.4. Plazos</div><div class="d-v">Fechas clave del cronograma (6.1): inicio, entregas parciales (validación de prototipo), instalación y entrega final. A completar con las fechas del GANTT.</div></div>
+  <div class="d-row"><div class="d-k">9.5. Responsabilidades</div><div class="d-v">El equipo: desarrollo, instalación, puesta en marcha y documentación. El cliente: dar acceso a las oficinas, validar requerimientos y prototipo, y proveer la cuenta Samsung/SmartThings y el punto de red.</div></div>
+  <div class="d-row"><div class="d-k">9.6. Criterios de aceptación</div><div class="d-v">Se apoyan en los OKRs: 4 nodos operando &gt;72 h sin interrupción, pérdida de lecturas &lt;2%, latencia &lt;5 s, al menos un enchufe operativo (Valeria apaga un split desde el celular en &lt;10 s) y el reporte de consumo por sector generado en el primer mes.</div></div>
+  <div class="d-row"><div class="d-k">9.7. Condiciones de modificación</div><div class="d-v">Todo cambio de alcance solicitado durante el desarrollo se registra en el control de cambios (sección 1) y se evalúa su impacto en el GANTT y en la oferta económica antes de aceptarse. Si una limitación no resulta aceptable, se convierte en un requerimiento nuevo.</div></div>
+  <div class="d-row"><div class="d-k">9.8. Firmas</div><div class="d-v">Firma del equipo desarrollador y de Valeria Gómez (simbólica, en la validación del prototipo).</div></div>
+</div>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 10. BITÁCORA DEL PROYECTO ══════ -->
+<h2 class="sec" id="s10"><span class="n">10.</span> Bitácora del Proyecto</h2>
+<p>Documento de trabajo del equipo. Registra la investigación de campo (entrevistas y minutas) y el seguimiento de la iteración (cambios sobre el mockup y avances técnicos por etapa). A diferencia del resto de la carpeta, no describe el sistema sino el proceso, y se actualiza a medida que el proyecto avanza.</p>
+
+<div class="box warn">
+  <span class="box-t">Criterio de registro</span>
+  <p>Se anota cada instancia de contacto con el cliente y cada hito técnico cerrado, con su fecha. Cuando una de esas instancias deriva en un cambio de alcance o de requerimiento, se replica como fila nueva en el Control de Cambios (sección 1).</p>
+</div>
+
+<h3 class="sub" id="s10-1"><span class="n">10.1.</span> Registro de Entrevistas</h3>
+<p>Instancias de relevamiento con el cliente y con los usuarios del estudio. Cada entrevista alimenta un apartado concreto de esta carpeta, por eso se registra el objetivo junto a la fecha.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Fecha</th><th>Con quién</th><th>Objetivo</th><th>Modalidad</th></tr></thead>
+<tbody>
+<tr><td>A completar</td><td><strong>Valeria Gómez</strong><div class="origin">Socia administradora del estudio.</div></td><td><strong>Entrevista 1 (bloques A-C).</strong> Identificación del problema real y relevamiento de la línea de base (quejas semanales, tiempo de detección, consumo actual).</td><td>Presencial</td></tr>
+<tr><td>A completar</td><td><strong>Valeria Gómez y empleados</strong></td><td><strong>Entrevista 2 (bloques D-G).</strong> Entorno físico, condiciones de instalación y datos técnicos que definen el hardware.</td><td>Presencial</td></tr>
+<tr><td>A completar</td><td><strong>Empleados del estudio</strong><div class="origin">Mínimo 2 participantes.</div></td><td><strong>Entrevistas cortas.</strong> Relevamiento del nivel tecnológico de los usuarios visores (es un KR del Objetivo 1).</td><td>Presencial</td></tr>
+<tr><td>A completar</td><td><strong>Valeria Gómez</strong></td><td><strong>Validación del mockup (etapa E04).</strong> Feedback sobre el prototipo de Figma antes de empezar a programar.</td><td>Presencial / Virtual</td></tr>
+</tbody>
+</table>
+</div>
+<div class="box todo"><span class="box-t">A completar por el equipo</span>Cargar la fecha real de cada instancia a medida que se concreta y sumar una fila por cada entrevista adicional. Lo conversado en cada una se vuelca en la minuta correspondiente (10.2).</div>
+
+<h3 class="sub" id="s10-2"><span class="n">10.2.</span> Minutas de Reunión</h3>
+<p>Acta breve de cada reunión con el cliente o del equipo. Se completa una minuta por reunión, siempre con los mismos seis campos, para que cualquier participante pueda reconstruir qué se decidió y quién quedó a cargo de qué.</p>
+
+<h4 class="subsub">Plantilla de minuta</h4>
+<div class="user-tbl admin">
+  <div class="row"><div class="k">Fecha y duración</div><div class="v">Día de la reunión y tiempo efectivo. Permite después comparar el esfuerzo real contra el estimado.</div></div>
+  <div class="row"><div class="k">Participantes</div><div class="v">Quiénes estuvieron, con su rol (equipo de proyecto y, si corresponde, cliente).</div></div>
+  <div class="row"><div class="k">Objetivo</div><div class="v">Para qué se convocó la reunión, en una sola frase.</div></div>
+  <div class="row"><div class="k">Temas tratados</div><div class="v">Puntos recorridos durante la reunión, en el orden en que se trataron.</div></div>
+  <div class="row"><div class="k">Decisiones y acuerdos</div><div class="v">Qué quedó definido. Es el campo que puede generar una fila en el Control de Cambios (sección 1).</div></div>
+  <div class="row"><div class="k">Próximos pasos y responsables</div><div class="v">Tareas que salen de la reunión, cada una con su responsable y su fecha comprometida.</div></div>
+</div>
+
+<h4 class="subsub">Minuta 01 · Validación del mockup con el cliente (E04)</h4>
+<div class="user-tbl">
+  <div class="row"><div class="k">Fecha y duración</div><div class="v">A completar (etapa E04). Duración estimada: 45 minutos.</div></div>
+  <div class="row"><div class="k">Participantes</div><div class="v">Valeria Gómez (cliente, socia administradora), Frontend / UX-UI y Project Manager por el equipo de proyecto.</div></div>
+  <div class="row"><div class="k">Objetivo</div><div class="v">Validar el mockup interactivo de Figma con la usuaria administradora antes de empezar a programar el dashboard (5.2.1).</div></div>
+  <div class="row"><div class="k">Temas tratados</div><div class="v">Recorrido de las cuatro vistas del prototipo (estado actual, historial, alertas y configuración de umbrales); lectura de la tabla de Limitaciones del alcance (5.1); prueba del prototipo en el celular de la clienta.</div></div>
+  <div class="row"><div class="k">Decisiones y acuerdos</div><div class="v">Comunicar el estado de cada ambiente en lenguaje natural con semáforos de color, en lugar de mostrar valores crudos; incorporar una vista resumen para celular; restringir la edición de umbrales al perfil administradora. Las limitaciones se aceptan tal como están declaradas.</div></div>
+  <div class="row"><div class="k">Próximos pasos y responsables</div><div class="v">Frontend / UX-UI aplica los tres cambios sobre el mockup y los asienta en el Registro de Cambios del Mockup (10.3). El PM abre la fila correspondiente en el Control de Cambios (sección 1) y evalúa el impacto en el GANTT (6.1).</div></div>
+</div>
+<div class="box todo"><span class="box-t">A completar por el equipo</span>Sumar una minuta por cada reunión, respetando los seis campos de la plantilla. Las fechas se cargan al concretarse cada instancia.</div>
+
+<h3 class="sub" id="s10-3"><span class="n">10.3.</span> Registro de Cambios del Mockup</h3>
+<p>Modificaciones aplicadas al prototipo de Figma después de validarlo con Valeria. Es la trazabilidad de la iteración con el usuario: muestra que el diseño de la interfaz no se cerró en el escritorio del equipo sino con la usuaria real delante.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Componente modificado</th><th>Qué se modificó tras la validación</th><th>Por qué (justificación UX / usuario)</th></tr></thead>
+<tbody>
+<tr><td><strong>Comunicación de estado</strong></td><td>Se reemplazaron los valores crudos por un estado en lenguaje natural con semáforos de color ("CO₂ elevado, ventile la sala").</td><td>La administradora declara una comodidad tecnológica media (3/5) y no maneja jerga técnica: un número sin contexto no le permite decidir nada (RNF04).</td></tr>
+<tr><td><strong>Vista celular</strong></td><td>Se sumó una vista resumen que muestra el estado de todos los ambientes en una sola pantalla del celular.</td><td>Valeria necesita ver el estado del estudio cuando está fuera de la oficina, sin instalar ninguna app (RF08).</td></tr>
+<tr><td><strong>Panel de umbrales</strong></td><td>Se restringió la edición de umbrales al perfil administradora; el empleado ve el panel en modo lectura.</td><td>Lo pidió la propia clienta en el Bloque D ("solo yo debería poder cambiar los umbrales") y evita cambios accidentales de configuración (RF06).</td></tr>
+</tbody>
+</table>
+</div>
+<div class="box ok">
+  <span class="box-t">Trazabilidad de la iteración</span>
+  <p>Cada fila de esta tabla nace de una minuta (10.2) y, cuando implica un cambio de requerimiento o de alcance, se replica como fila nueva en el Control de Cambios (sección 1). Así el mockup validado queda unido a la especificación por una cadena de evidencia completa.</p>
+</div>
+
+<h3 class="sub" id="s10-4"><span class="n">10.4.</span> Bitácora de Avances Técnicos</h3>
+<p>Hitos técnicos cerrados, en orden cronológico, siguiendo las etapas del cronograma (6.1). Registrar la fecha real de cierre permite comparar el avance efectivo contra el GANTT planificado.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>Etapa</th><th>Hitos registrados</th><th>Fecha de cierre</th></tr></thead>
+<tbody>
+<tr><td class="rid">E01</td><td>Primera entrevista con Valeria (bloques A-C). Relevamiento de la línea de base: quejas semanales, tiempo de detección y situación del consumo eléctrico.</td><td>A completar</td></tr>
+<tr><td class="rid">E02</td><td>Segunda entrevista (bloques D-G): entorno físico y condiciones de instalación. Cierre del estudio de factibilidad técnica, económica y de gestión.</td><td>A completar</td></tr>
+<tr><td class="rid">E03</td><td>Especificación de RF, RNF, RHW e ISW. Definición de la arquitectura en tres capas y del modelo entidad-relación de la base de datos (5.6).</td><td>A completar</td></tr>
+<tr><td class="rid">E04</td><td>Mockup interactivo en Figma, diseño 3D de la carcasa del nodo, prueba del enchufe inteligente SmartThings y validación del prototipo con Valeria.</td><td>A completar</td></tr>
+<tr><td class="rid">E05</td><td>Firmware del ESP32, backend, base de datos, dashboard, servicio de alertas e integración con SmartThings. Instalación del repetidor WiFi y de los nodos en cada ambiente.</td><td>A completar</td></tr>
+<tr><td class="rid">E06</td><td>Presentación profesional del proyecto y pitch de negocio.</td><td>A completar</td></tr>
+</tbody>
+</table>
+</div>
+<div class="box warn">
+  <span class="box-t">Criterio de cierre</span>
+  <p>Un hito se da por cerrado cuando su entregable está verificado, no cuando se termina de trabajar en él. Los desvíos respecto del GANTT (6.1) se anotan en la fila correspondiente y se revisan en la reunión siguiente, con su minuta (10.2).</p>
 </div>
 
 <footer>
