@@ -89,6 +89,19 @@ aside::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
 .back-hub:hover .arr{color:var(--accent);}
 .toc .toc-group{margin-top:1.1rem;margin-bottom:.25rem;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:0 9px;font-family:var(--sans);}
 
+/* TOGGLE DEL MENU (solo ancho reducido) */
+.toc-toggle{display:none;}
+.toc-toggle .tt-bars{position:relative;width:15px;height:11px;flex:none;}
+.toc-toggle .tt-bars i{position:absolute;left:0;width:100%;height:1.5px;background:currentColor;border-radius:1px;transition:transform .18s,opacity .18s;}
+.toc-toggle .tt-bars i:nth-child(1){top:0;}
+.toc-toggle .tt-bars i:nth-child(2){top:4.75px;}
+.toc-toggle .tt-bars i:nth-child(3){top:9.5px;}
+.toc-toggle[aria-expanded="true"] .tt-bars i:nth-child(1){transform:translateY(4.75px) rotate(45deg);}
+.toc-toggle[aria-expanded="true"] .tt-bars i:nth-child(2){opacity:0;}
+.toc-toggle[aria-expanded="true"] .tt-bars i:nth-child(3){transform:translateY(-4.75px) rotate(-45deg);}
+.toc-toggle .tt-label{font-weight:600;}
+.toc-toggle .tt-current{margin-left:auto;text-align:right;font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--ink3);letter-spacing:.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:52%;}
+
 /* MAIN */
 main{padding:3rem 3.25rem 6rem;min-width:0;}
 .doc-hero{border-bottom:1px solid var(--border);padding-bottom:1.75rem;margin-bottom:2.75rem;}
@@ -101,12 +114,12 @@ main{padding:3rem 3.25rem 6rem;min-width:0;}
 .hero-meta strong{color:var(--ink);font-weight:600;}
 
 /* HEADINGS */
-h2.sec{font-weight:600;font-size:1.55rem;letter-spacing:-.015em;margin:3.75rem 0 .4rem;padding-top:1rem;scroll-margin-top:1.25rem;}
+h2.sec{font-weight:600;font-size:1.55rem;letter-spacing:-.015em;margin:3.75rem 0 .4rem;padding-top:1rem;scroll-margin-top:var(--anchor-offset,1.25rem);}
 h2.sec .n{color:var(--accent);font-family:var(--mono);font-weight:500;font-size:.85em;margin-right:.15em;}
 h2.sec:first-of-type{margin-top:0;}
-h3.sub{font-weight:600;font-size:1.13rem;margin:2.1rem 0 .5rem;scroll-margin-top:1.25rem;color:var(--ink);letter-spacing:-.01em;}
+h3.sub{font-weight:600;font-size:1.13rem;margin:2.1rem 0 .5rem;scroll-margin-top:var(--anchor-offset,1.25rem);color:var(--ink);letter-spacing:-.01em;}
 h3.sub .n{color:var(--accent);font-family:var(--mono);font-weight:500;font-size:.86em;margin-right:.1em;}
-h4.subsub{font-weight:600;font-size:.97rem;margin:1.5rem 0 .4rem;color:var(--ink2);scroll-margin-top:1.25rem;letter-spacing:.005em;}
+h4.subsub{font-weight:600;font-size:.97rem;margin:1.5rem 0 .4rem;color:var(--ink2);scroll-margin-top:var(--anchor-offset,1.25rem);letter-spacing:.005em;}
 h4.subsub .n{color:var(--accent);font-family:var(--mono);font-weight:500;}
 p{margin-bottom:.9rem;}
 ul,ol{margin:.4rem 0 1.1rem 1.25rem;}
@@ -183,6 +196,49 @@ code.ic{background:var(--bg2);border:1px solid var(--border2);border-radius:4px;
 .er-fig svg{display:block;min-width:760px;margin:0 auto;}
 .figcap{font-family:var(--sans);font-size:.78rem;color:var(--ink3);text-align:center;margin-top:.7rem;}
 
+/* QUICK START (pasos numerados + huecos de captura) */
+.qs-step{border:1px solid var(--border);border-radius:var(--radius);background:var(--card);padding:1.05rem 1.2rem 1.15rem;margin:1rem 0;}
+.qs-step .qs-h{display:flex;align-items:center;gap:11px;font-family:var(--sans);font-weight:600;font-size:.99rem;color:var(--ink);margin-bottom:.45rem;letter-spacing:-.005em;}
+.qs-step .qs-n{flex:none;width:25px;height:25px;border-radius:50%;background:var(--warm);color:var(--card);font-family:var(--mono);font-size:11.5px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+.qs-step p{font-size:.88rem;color:var(--ink2);margin-bottom:0;}
+.qs-step .qs-who{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.03em;text-transform:uppercase;padding:1px 7px;border-radius:3px;background:var(--bg2);color:var(--ink3);border:1px solid var(--border);margin-left:auto;flex:none;}
+.shot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;text-align:center;min-height:150px;border:1px dashed var(--del-bd);background:var(--del-bg);border-radius:var(--radius-sm);padding:1.1rem;margin:.9rem 0 0;}
+.shot .shot-t{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--warm);}
+.shot .shot-d{font-family:var(--sans);font-size:.8rem;color:var(--ink3);line-height:1.5;max-width:46ch;}
+@media(max-width:560px){.qs-step .qs-h{flex-wrap:wrap;}.qs-step .qs-who{margin-left:36px;}.shot{min-height:120px;}}
+
+/* FAQ (acordeon nativo) */
+.faq{border:1px solid var(--border);border-radius:var(--radius);background:var(--card);margin:1.15rem 0 1.4rem;overflow:hidden;}
+.faq details{border-bottom:1px solid var(--border2);}
+.faq details:last-child{border-bottom:none;}
+.faq summary{display:flex;align-items:flex-start;gap:11px;cursor:pointer;list-style:none;padding:.8rem 1.1rem;font-family:var(--sans);font-weight:600;font-size:.89rem;color:var(--ink);line-height:1.5;transition:background .14s;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::before{content:'+';flex:none;font-family:var(--mono);font-weight:600;color:var(--accent);width:11px;text-align:center;}
+.faq details[open] summary::before{content:'\2212';}
+.faq summary:hover{background:var(--bg2);}
+.faq summary:focus-visible{outline-offset:-2px;}
+.faq .faq-a{padding:0 1.1rem 1rem 2.4rem;font-family:var(--sans);font-size:.87rem;color:var(--ink2);line-height:1.62;}
+.faq .faq-a p{margin-bottom:.55rem;}
+.faq .faq-a p:last-child{margin-bottom:0;}
+
+/* EQUIPO (presentacion de integrantes) */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:.8rem;margin:1.15rem 0 1.35rem;}
+.member{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.05rem .8rem .95rem;text-align:center;}
+.m-photo{display:block;width:76px;height:76px;margin:0 auto .75rem;border-radius:50%;object-fit:cover;border:1px solid var(--border);background:var(--bg2) center/58% no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2737%27%20r%3D%2717%27%20fill%3D%27%23b3bac6%27%2F%3E%3Cpath%20d%3D%27M50%2059c-16%200-29%2011-29%2025v16h58V84c0-14-13-25-29-25z%27%20fill%3D%27%23b3bac6%27%2F%3E%3C%2Fsvg%3E");}
+.member .m-name{font-family:var(--sans);font-weight:600;font-size:.87rem;color:var(--ink);line-height:1.3;}
+.member .m-role{font-family:var(--sans);font-size:.75rem;color:var(--ink3);line-height:1.4;margin-top:.28rem;}
+@media(max-width:560px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* EMBED EN VIVO (planillas / tableros) */
+.live-embed{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:1.3rem 0 .7rem;background:var(--card);}
+.live-embed .le-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem .9rem;padding:.55rem .85rem;background:var(--bg2);border-bottom:1px solid var(--border);}
+.live-embed .le-t{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);display:flex;align-items:center;gap:7px;}
+.live-embed .le-t::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent2);flex:none;}
+.live-embed .le-open{font-family:var(--sans);font-size:11px;font-weight:600;color:var(--accent);text-decoration:none;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px 10px;white-space:nowrap;transition:background .14s;}
+.live-embed .le-open:hover{background:var(--bg3);}
+.live-embed iframe{display:block;width:100%;height:560px;border:0;background:#fff;}
+@media(max-width:560px){.live-embed iframe{height:430px;}.live-embed .le-bar{padding:.5rem .7rem;}}
+
 /* ARCH FLOW */
 .flow{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.77rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin:1.1rem 0;color:var(--ink2);}
 .flow .node{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 10px;color:var(--ink);}
@@ -207,9 +263,18 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 
 @media(max-width:920px){
   .wrap{grid-template-columns:1fr;}
-  aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border);padding:1.5rem 1.25rem;}
+  aside{position:sticky;top:0;z-index:20;height:auto;border-right:none;border-bottom:1px solid var(--border);padding:1rem 1.25rem;overflow:visible;background:var(--bg);}
+  .back-hub{margin-bottom:.9rem;}
+  .toc-brand{margin-bottom:.15rem;}
+  .toc-sub{margin-bottom:.9rem;}
   main{padding:2.25rem 1.25rem 4rem;}
   .doc-hero h1{font-size:clamp(1.6rem,6vw,2rem);}
+  /* el menu se colapsa detras de un boton (solo si el JS esta activo) */
+  aside.js-nav .toc-toggle{display:flex;align-items:center;gap:10px;width:100%;font-family:var(--sans);font-size:12.5px;color:var(--ink2);background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;cursor:pointer;text-align:left;transition:background .14s,color .14s;}
+  aside.js-nav .toc-toggle:hover{background:var(--bg3);color:var(--ink);}
+  aside.js-nav .toc{display:none;margin-top:.7rem;padding-top:.6rem;border-top:1px solid var(--border2);max-height:min(62vh,460px);overflow-y:auto;overscroll-behavior:contain;}
+  aside.js-nav.nav-open .toc{display:block;}
+  aside.js-nav .toc .toc-group:first-child{margin-top:.2rem;}
 }
 @media(max-width:560px){
   main{padding:1.75rem 1rem 3rem;}
@@ -222,8 +287,10 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
   body{background:#fff;color:#000;font-size:10.5pt;line-height:1.5;}
   h2.sec,h3.sub,h4.subsub{color:#000;break-after:avoid;}
   h2.sec .n,h3.sub .n,h4.subsub .n,.doc-kicker,.doc-hero .prod,a.inline{color:#000;}
-  .tbl-wrap,.er-fig,pre,.box,.deliverable,.user-tbl,table tr{break-inside:avoid;}
-  .tbl-wrap,.box,.deliverable,.er-fig,.flow{border-color:#bbb;}
+  .tbl-wrap,.er-fig,pre,.box,.deliverable,.user-tbl,.live-embed,.member,.qs-step,.shot,.faq details,table tr{break-inside:avoid;}
+  .tbl-wrap,.box,.deliverable,.er-fig,.flow,.live-embed,.qs-step,.shot,.faq{border-color:#bbb;}
+  .live-embed iframe{display:none;}
+  .live-embed .le-bar{background:#eee;border-bottom:none;}
   thead th{background:#eee;color:#000;}
   pre{background:#f5f5f5;color:#111;border:1px solid #ccc;}
   pre .kw,pre .ty,pre .cm,pre .st,pre .fn{color:#111;}
@@ -240,11 +307,12 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 <div class="wrap">
 
 <!-- ═══════════ TOC ═══════════ -->
-<aside>
+<aside id="side">
   <a class="back-hub" href="https://lpedaci.github.io/ev_proy-landing-casos/"><span class="arr" aria-hidden="true">←</span> Volver al hub</a>
   <div class="toc-brand">Documentación del <span>Proyecto</span></div>
   <div class="toc-sub">SensorOffice · 7mo Informática 2026</div>
-  <nav class="toc">
+  <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-nav"><span class="tt-bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="tt-label">Contenidos</span><span class="tt-current" aria-hidden="true"></span></button>
+  <nav class="toc" id="toc-nav">
     <div class="toc-group">Primera sección</div>
     <a href="#s1">1 · Control de Cambios</a>
     <a href="#s2">2 · Diagnóstico: Árbol de Problemas</a>
@@ -281,8 +349,12 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
     <a href="#s10-2" class="lvl2">10.2 Minutas de Reunión</a>
     <a href="#s10-3" class="lvl2">10.3 Cambios del Mockup</a>
     <a href="#s10-4" class="lvl2">10.4 Avances Técnicos</a>
+    <div class="toc-group">Guía de uso</div>
+    <a href="#s11">11 · Guía de Inicio Rápido</a>
+    <a href="#s12">12 · Preguntas Frecuentes</a>
   </nav>
 </aside>
+<script>document.getElementById('side').classList.add('js-nav');</script>
 
 <!-- ═══════════ MAIN ═══════════ -->
 <main>
@@ -1001,7 +1073,7 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 <h2 class="sec" id="s6"><span class="n">6.</span> Oferta de Gestión</h2>
 
 <h3 class="sub" id="s6-1"><span class="n">6.1.</span> GANTT</h3>
-<p>Cronograma de tareas, responsables y duración estimada, organizado por las etapas del proyecto (E01 a E06). El GANTT se lleva en Notion / Google Sheets y se actualiza a medida que avanza el proyecto.</p>
+<p>Cronograma de tareas, responsables y duración estimada, organizado por las etapas del proyecto (E01 a E06). El GANTT se lleva en una planilla de cálculo (Google Sheets) y se actualiza a medida que avanza el proyecto.</p>
 <div class="tbl-wrap">
 <table>
 <thead><tr><th>Etapa</th><th>Tareas principales</th><th>Entregable</th></tr></thead>
@@ -1015,7 +1087,17 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </tbody>
 </table>
 </div>
-<div class="deliverable"><span class="d-t">Entregable del equipo</span>Insertar la imagen del GANTT con el hipervínculo de Notion / Sheets dentro del texto explicativo, con fechas y responsables reales.</div>
+<p>Vista en vivo de la <strong>plantilla de cronograma</strong> que usa la materia, a modo de ejemplo del formato esperado. El embed se actualiza solo: lo que se carga en la planilla de cálculo se refleja acá sin volver a tocar el documento. Las solapas de la parte inferior permiten pasar del GANTT a las referencias y a la estimación de costos.</p>
+<div class="live-embed">
+  <div class="le-bar">
+    <span class="le-t">Vista en vivo · Google Sheets · solo lectura</span>
+    <a class="le-open" href="https://docs.google.com/spreadsheets/d/10dP-s-iefJMvuQ2EOiV5pMtVPZR1gEK9YoTmoiA9KdU/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Abrir en Google Sheets ↗</a>
+  </div>
+  <iframe src="https://docs.google.com/spreadsheets/d/10dP-s-iefJMvuQ2EOiV5pMtVPZR1gEK9YoTmoiA9KdU/preview" title="Cronograma GANTT del proyecto en Google Sheets" loading="lazy"></iframe>
+</div>
+<div class="figcap">Figura 2. Plantilla de cronograma (GANTT, referencias y estimación de costos), embebida en vivo desde Google Sheets.</div>
+
+<div class="deliverable"><span class="d-t">Entregable del equipo</span>Reemplazar el embed por el link a la planilla propia del equipo, con las fechas y los responsables reales.</div>
 
 <h3 class="sub" id="s6-2"><span class="n">6.2.</span> Infraestructura administrativa <span class="bookref">Buenas Prácticas UTN p.62</span></h3>
 <p>Organización interna del equipo y herramientas de trabajo. Siguiendo el esquema del libro UTN, el equipo se organiza en un grupo de dirección/gestión y un grupo de desarrollo, adaptado a la escala del proyecto de 7mo.</p>
@@ -1031,8 +1113,39 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 </tbody>
 </table>
 </div>
+<h4 class="subsub">El equipo</h4>
+<p>Presentación de los integrantes, uno por cada rol del cuadro anterior (hasta 5 personas). Cada tarjeta lleva el nombre y apellido y una foto de perfil de estilo profesional: fondo neutro, encuadre de busto, buena luz y la misma proporción en todas, para que el documento se lea como una presentación de equipo y no como un collage.</p>
+<div class="team-grid">
+  <div class="member">
+    <span class="m-photo" role="img" aria-label="Foto de perfil del director del proyecto (a completar)"></span>
+    <div class="m-name">Nombre y Apellido</div>
+    <div class="m-role">Director / PM</div>
+  </div>
+  <div class="member">
+    <span class="m-photo" role="img" aria-label="Foto de perfil del líder de proyecto (a completar)"></span>
+    <div class="m-name">Nombre y Apellido</div>
+    <div class="m-role">Líder de proyecto</div>
+  </div>
+  <div class="member">
+    <span class="m-photo" role="img" aria-label="Foto de perfil del responsable de backend, base de datos y red (a completar)"></span>
+    <div class="m-name">Nombre y Apellido</div>
+    <div class="m-role">Backend / BD / Red</div>
+  </div>
+  <div class="member">
+    <span class="m-photo" role="img" aria-label="Foto de perfil del responsable de frontend y UX-UI (a completar)"></span>
+    <div class="m-name">Nombre y Apellido</div>
+    <div class="m-role">Frontend / UX-UI</div>
+  </div>
+  <div class="member">
+    <span class="m-photo" role="img" aria-label="Foto de perfil del responsable de microcontrolador e instalación (a completar)"></span>
+    <div class="m-name">Nombre y Apellido</div>
+    <div class="m-role">MCU / Instalador</div>
+  </div>
+</div>
+<div class="deliverable"><span class="d-t">Entregable del equipo</span>Completar el nombre y apellido de cada integrante y reemplazar cada <code class="ic">&lt;span class="m-photo"&gt;&lt;/span&gt;</code> por <code class="ic">&lt;img class="m-photo" src="img/integrante-01.jpg" alt="Foto de Nombre Apellido"&gt;</code>, con la imagen guardada en el repositorio. Si el equipo es de menos de 5 integrantes, eliminar las tarjetas sobrantes.</div>
+
 <div class="deflist">
-  <div class="d-row"><div class="d-k">Gestión de tareas</div><div class="d-v">Notion (tablero + GANTT).</div></div>
+  <div class="d-row"><div class="d-k">Gestión de tareas</div><div class="d-v">Planilla de cálculo (Google Sheets): GANTT, asignación de tareas y estimación de costos.</div></div>
   <div class="d-row"><div class="d-k">Documentación</div><div class="d-v">Google Drive / Docs + este documento; código y README en GitHub.</div></div>
   <div class="d-row"><div class="d-k">Comunicación</div><div class="d-v">Grupo de mensajería del equipo + reuniones de validación con el cliente.</div></div>
   <div class="d-row"><div class="d-k">Repositorio</div><div class="d-v">GitHub (todos los integrantes como contributors; equipo docente como colaborador si es privado).</div></div>
@@ -1210,6 +1323,135 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
   <p>Un hito se da por cerrado cuando su entregable está verificado, no cuando se termina de trabajar en él. Los desvíos respecto del GANTT (6.1) se anotan en la fila correspondiente y se revisan en la reunión siguiente, con su minuta (10.2).</p>
 </div>
 
+<div class="sec-rule"></div>
+
+<!-- ══════ 11. GUÍA DE INICIO RÁPIDO ══════ -->
+<h2 class="sec" id="s11"><span class="n">11.</span> Guía de Inicio Rápido</h2>
+<p>Guía de puesta en marcha para el usuario final del estudio (Quick Start Guide). Cubre las seis operaciones que resuelven el uso diario del sistema, en el orden en que se aprenden. Está escrita sin jerga técnica, con el mismo criterio que la interfaz (5.2): quien la lee no necesita saber qué es un nodo ni qué es MQTT.</p>
+
+<div class="box info">
+  <span class="box-t">Antes de empezar</span>
+  <p>Para que estos pasos funcionen tienen que estar dadas cuatro condiciones: el repetidor WiFi instalado y la red llegando a todos los ambientes (RHW06), los nodos colocados y con el LED en verde (RHW05), el usuario y la contraseña ya creados por el equipo, y un navegador actualizado en la PC o en el celular. No se instala ninguna aplicación.</p>
+</div>
+
+<div class="qs-step">
+  <div class="qs-h"><span class="qs-n">1</span>Entrar al dashboard e iniciar sesión<span class="qs-who">Administradora y empleados</span></div>
+  <p>Abrir el navegador (PC o celular) e ingresar a la dirección del sistema. Se accede con el usuario y la contraseña que entrega el equipo instalador. No hace falta instalar ninguna aplicación (RNF03).</p>
+<div class="shot">
+  <span class="shot-t">Captura a insertar</span>
+  <span class="shot-d">Pantalla de inicio de sesión, con los campos de usuario y contraseña.</span>
+</div>
+</div>
+<div class="qs-step">
+  <div class="qs-h"><span class="qs-n">2</span>Leer el estado de un ambiente<span class="qs-who">Administradora y empleados</span></div>
+  <p>La pantalla principal muestra los tres ambientes con su estado actual. Cada variable se comunica en lenguaje natural y con un semáforo de color (“Temperatura OK”, “CO₂ elevado, ventile la sala”), no como un número suelto (RNF04).</p>
+<div class="shot">
+  <span class="shot-t">Captura a insertar</span>
+  <span class="shot-d">Vista de estado actual con las tarjetas de los ambientes y los semáforos de color.</span>
+</div>
+</div>
+<div class="qs-step">
+  <div class="qs-h"><span class="qs-n">3</span>Consultar el historial de una variable<span class="qs-who">Administradora y empleados</span></div>
+  <p>Al elegir un ambiente y una variable se abre el gráfico de evolución en el tiempo. Sirve para responder preguntas del tipo “¿a qué hora se calienta la sala de reuniones?” con datos y no con percepciones (RF02).</p>
+<div class="shot">
+  <span class="shot-t">Captura a insertar</span>
+  <span class="shot-d">Gráfico de historial con el selector de variable y de rango de fechas.</span>
+</div>
+</div>
+<div class="qs-step">
+  <div class="qs-h"><span class="qs-n">4</span>Configurar un umbral<span class="qs-who">Solo administradora</span></div>
+  <p>En el panel de configuración se define el valor mínimo y máximo de cada variable por ambiente. Al superarse, el sistema dispara una alerta. Los empleados ven este panel en modo lectura y no pueden modificarlo (RF06 y RF07).</p>
+<div class="shot">
+  <span class="shot-t">Captura a insertar</span>
+  <span class="shot-d">Panel de umbrales con los campos de valor mínimo y máximo por variable.</span>
+</div>
+</div>
+<div class="qs-step">
+  <div class="qs-h"><span class="qs-n">5</span>Atender una alerta<span class="qs-who">Administradora</span></div>
+  <p>Cuando una lectura sale de rango llega la notificación por email o push y la alerta queda listada en el panel. Cada alerta indica el ambiente, la variable, el valor medido y el horario (RF03).</p>
+<div class="shot">
+  <span class="shot-t">Captura a insertar</span>
+  <span class="shot-d">Panel de alertas activas y ejemplo de la notificación como llega al celular.</span>
+</div>
+</div>
+<div class="qs-step">
+  <div class="qs-h"><span class="qs-n">6</span>Apagar un split a distancia<span class="qs-who">Administradora</span></div>
+  <p>Si el sistema detecta consumo en un ambiente sin ocupación, avisa. Desde la vista del ambiente se envía la orden de apagado al enchufe inteligente y el split se apaga sin ir hasta el lugar. El sistema nunca lo apaga solo: la decisión siempre es de una persona (RF04 y LIM01).</p>
+<div class="shot">
+  <span class="shot-t">Captura a insertar</span>
+  <span class="shot-d">Control de apagado remoto del split y confirmación de la orden enviada.</span>
+</div>
+</div>
+
+<div class="box ok">
+  <span class="box-t">Y una vez por mes</span>
+  <p>El reporte mensual de consumo por sector se genera solo. Muestra cuánto consumió cada ambiente en el mes y permite comparar contra la línea de base relevada antes de instalar el sistema, que es la forma de comprobar el ahorro (RF05).</p>
+</div>
+
+<div class="deliverable"><span class="d-t">Entregable del equipo</span>Reemplazar cada bloque punteado por la captura real del sistema una vez que el dashboard esté funcionando (etapa E05), guardando las imágenes en el repositorio. Conviene tomarlas todas con el mismo ancho de ventana para que la guía se lea pareja.</div>
+
+<div class="sec-rule"></div>
+
+<!-- ══════ 12. PREGUNTAS FRECUENTES ══════ -->
+<h2 class="sec" id="s12"><span class="n">12.</span> Preguntas Frecuentes</h2>
+<p>Las preguntas que el cliente y los usuarios del estudio hacen con más frecuencia sobre el producto, con la respuesta y la referencia al requerimiento o a la limitación que la respalda. Sirve de material de apoyo en la reunión de validación y como respaldo del equipo durante la defensa del proyecto.</p>
+
+<div class="faq">
+  <details>
+    <summary>¿El sistema apaga los aires acondicionados solo?</summary>
+    <div class="faq-a"><p>No. SensorOffice detecta que hay consumo en un ambiente sin gente y avisa, pero la orden de apagado la da siempre una persona desde el dashboard o desde la app SmartThings. Es una decisión de diseño, no una carencia: si el sensor de presencia se equivoca con alguien que está quieto, un apagado automático sería peor que el problema que resuelve. Está declarado como LIM01 y previsto como mejora para una v2, con confirmación y período de gracia (4.6).</p></div>
+  </details>
+  <details>
+    <summary>¿Hay que instalar una aplicación en el celular?</summary>
+    <div class="faq-a"><p>No. El sistema se usa desde el navegador, tanto en la PC como en el celular, con la misma dirección y el mismo usuario (RNF03). No hay app nativa ni hay que pasar por una tienda de aplicaciones: es LIM04, y la publicación como PWA instalable está prevista para una v3.</p></div>
+  </details>
+  <details>
+    <summary>¿Tenemos que cambiar los splits?</summary>
+    <div class="faq-a"><p>No. Los splits actuales se conservan tal como están. El control remoto se logra intercalando un enchufe inteligente SmartThings entre el tomacorriente y el equipo (RHW07), justamente porque los splits del estudio son viejos y no tienen conectividad propia. No se reemplaza ni se modifica el equipo de climatización.</p></div>
+  </details>
+  <details>
+    <summary>¿Qué pasa si se corta el WiFi o Internet?</summary>
+    <div class="faq-a"><p>Cada nodo reintenta la conexión solo, cada 30 segundos, sin reiniciarse (RNF01). El sistema está dimensionado para que la pérdida de lecturas por problemas de red quede por debajo del 2% del total de muestras esperadas, y por eso la instalación del repetidor WiFi es un prerequisito y no un accesorio (RHW06). Si el corte es de Internet y el backend está en la nube, el dashboard queda inaccesible hasta que vuelva el servicio.</p></div>
+  </details>
+  <details>
+    <summary>¿Los empleados pueden cambiar la configuración?</summary>
+    <div class="faq-a"><p>No. Hay dos perfiles: la administradora tiene acceso total y los empleados tienen acceso de solo lectura, para consultar el estado y el historial de su ambiente (RF06). Los empleados no pueden modificar umbrales, gestionar usuarios ni operar los enchufes. Además, toda operación que cambia el estado del sistema queda registrada con usuario, fecha y hora (4.4.9).</p></div>
+  </details>
+  <details>
+    <summary>¿Qué tan preciso es el sensor de calidad del aire?</summary>
+    <div class="faq-a"><p>El MQ-135 da valores orientativos, no de precisión de laboratorio (LIM05). Para el objetivo del proyecto alcanza, porque lo que interesa es detectar que el aire de un ambiente se está deteriorando y avisar a tiempo, no certificar una medición. Si en algún momento se necesita medición certificada, la evolución prevista es reemplazarlo por un sensor SCD40 de tecnología NDIR (4.6).</p></div>
+  </details>
+  <details>
+    <summary>¿Cuánto tarda el sistema en avisar de un problema?</summary>
+    <div class="faq-a"><p>Entre que el sensor toma la lectura y el dato aparece en pantalla pasan menos de 5 segundos (RNF02). El objetivo del proyecto es que un problema ambiental se detecte en menos de 5 minutos, contra las horas que hoy tarda en detectarse (que es cuando alguien se queja).</p></div>
+  </details>
+  <details>
+    <summary>¿Puedo ver el estado del estudio desde afuera?</summary>
+    <div class="faq-a"><p>Sí, hay una vista resumen pensada para el celular y para el acceso fuera del estudio (RF08). La condición es que el backend esté alojado en la nube: si se opta por una Raspberry Pi local, el acceso queda limitado a la red del estudio (LIM03). Es una decisión que se toma al definir la infraestructura, y migrar de una opción a la otra es directo.</p></div>
+  </details>
+  <details>
+    <summary>¿Se puede sumar un ambiente más adelante?</summary>
+    <div class="faq-a"><p>Sí, y es una de las metas del proyecto. Agregar un nodo en un ambiente nuevo debe llevar menos de 30 minutos y no requiere modificar el software: el técnico configura la red y el nombre del ambiente desde un portal de setup en la red local, sin reprogramar el ESP32 (4.3). El costo de materiales por nodo adicional está acotado a menos de $25.000.</p></div>
+  </details>
+  <details>
+    <summary>¿Cómo me doy cuenta de que un nodo dejó de funcionar?</summary>
+    <div class="faq-a"><p>De dos formas. En el lugar, cada nodo tiene un LED de estado a la vista: verde si funciona bien, rojo si hay un error (RHW05), así que se ve sin abrir nada. Y en el dashboard, el estado de cada nodo figura como <code class="ic">ok</code>, <code class="ic">error</code> u <code class="ic">offline</code>.</p></div>
+  </details>
+  <details>
+    <summary>¿El sistema guarda datos personales?</summary>
+    <div class="faq-a"><p>No. Lo que se almacena son lecturas ambientales (temperatura, humedad, CO₂, luminosidad, presencia y consumo) asociadas a un ambiente, no a una persona. El sensor de presencia detecta que hay movimiento en la sala, no quién está. De los usuarios se guardan nombre, email y rol, con la contraseña almacenada como hash y nunca en texto plano (4.4.9).</p></div>
+  </details>
+  <details>
+    <summary>¿Incluye mantenimiento del equipamiento después de la entrega?</summary>
+    <div class="faq-a"><p>No en esta entrega (LIM06). El alcance cubre el desarrollo, la instalación, la puesta en marcha y la documentación. El mantenimiento del hardware posterior se negocia por separado, como un acuerdo de soporte anual, y quedaría fuera del contrato firmado (sección 9).</p></div>
+  </details>
+</div>
+
+<div class="box info">
+  <span class="box-t">Cómo se mantiene</span>
+  <p>Cada pregunta nueva que surge en una reunión con el cliente se suma acá y se anota en la minuta correspondiente (10.2). Si la respuesta obliga a cambiar el alcance, además se registra en el Control de Cambios (sección 1).</p>
+</div>
+
 <footer>
   <div class="footer-accent"><i></i><i></i></div>
   <div class="footer-inner">
@@ -1230,14 +1472,38 @@ footer .btn-linkedin svg{width:15px;height:15px;fill:currentColor;flex:none;}
 // TOC activo según scroll
 const links=[...document.querySelectorAll('.toc a')];
 const map=links.map(a=>({a,el:document.querySelector(a.getAttribute('href'))})).filter(o=>o.el);
+const cur=document.querySelector('.tt-current');
 const obs=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){
     links.forEach(a=>a.classList.remove('act'));
     const hit=map.find(o=>o.el===e.target);
-    if(hit)hit.a.classList.add('act');
+    if(hit){hit.a.classList.add('act');if(cur)cur.textContent=hit.a.textContent.replace(' · ','. ');}
   }});
 },{rootMargin:'-10% 0px -80% 0px',threshold:0});
 map.forEach(o=>obs.observe(o.el));
+
+// Menú desplegable en anchos reducidos
+const side=document.getElementById('side');
+const toggle=document.querySelector('.toc-toggle');
+const setNav=open=>{side.classList.toggle('nav-open',open);toggle.setAttribute('aria-expanded',open?'true':'false');if(!open&&typeof setOffset==='function')setOffset();};
+toggle.addEventListener('click',()=>setNav(!side.classList.contains('nav-open')));
+// al elegir una sección el menú se cierra para no tapar el contenido
+links.forEach(a=>a.addEventListener('click',()=>setNav(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&side.classList.contains('nav-open')){setNav(false);toggle.focus();}});
+// si se vuelve a ancho de escritorio, el menú queda siempre visible por CSS
+matchMedia('(min-width:921px)').addEventListener('change',e=>{if(e.matches)setNav(false);});
+// con el menú sticky arriba, los anclas del índice tienen que frenar por debajo de él
+const chico=matchMedia('(max-width:920px)');
+const setOffset=()=>{
+  if(side.classList.contains('nav-open'))return;
+  document.documentElement.style.setProperty('--anchor-offset',chico.matches?(side.offsetHeight+14)+'px':'');
+};
+setOffset();
+addEventListener('resize',setOffset);
+chico.addEventListener('change',setOffset);
+
+// Al imprimir, las preguntas frecuentes se despliegan todas
+addEventListener('beforeprint',()=>document.querySelectorAll('.faq details').forEach(d=>d.open=true));
 </script>
 </body>
 </html>
